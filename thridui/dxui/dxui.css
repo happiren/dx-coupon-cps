@@ -1,0 +1,187 @@
+
+
+body {
+	/*以下参考微信实现*/
+	--dx-bg-0: #ededed;
+	--dx-bg-1: #f7f7f7;
+	--dx-bg-2: #fff;
+	--dx-bg-3: #f7f7f7;
+	--dx-bg-4: #4c4c4c;
+	--dx-bg-5: #fff;
+	--dx-fg-0: rgba(0, 0, 0, 0.9);
+	--dx-fg-half: rgba(0, 0, 0, 0.9);
+	--dx-fg-1: rgba(0, 0, 0, 0.5);
+	--dx-fg-2: rgba(0, 0, 0, 0.3);
+	--dx-fg-3: rgba(0, 0, 0, 0.1);
+	--dx-red: #fa5151;
+	--dx-orange: #fa9d3b;
+	--dx-yellow: #ffc300;
+	--dx-green: #91d300;
+	--dx-lightgreen: #95ec69;
+	--dx-brand: #07c160;
+	/* --dx-blue: #10aeff; */
+	--dx-indigo: #1485ee;
+	--dx-purple: #6467f0;
+	--dx-white: #fff;
+	--dx-link: #576b95;
+	--dx-textgreen: #06ae56;
+	--dx-fg: black;
+	--dx-bg: white;
+	--dx-tag-text-orange: #fa9d3b;
+	--dx-tag-background-orange: rgba(250, 157, 59, 0.1);
+	--dx-tag-text-green: #06ae56;
+	--dx-tag-background-green: rgba(6, 174, 86, 0.1);
+	--dx-tag-text-blue: #10aeff;
+	--dx-tag-background-blue: rgba(95,116,255,1);
+	--dx-tag-text-black: rgba(0, 0, 0, 0.5);
+	--dx-tag-background-black: rgba(0, 0, 0, 0.05);
+
+	/*主要使用以下几个颜色和字体即可*/
+	--dx-background: #FAFAFA;
+	--dx-color-blue: #2979ff;
+	--dx-color-pri:#2979ff;
+	--dx-color-tip-red: #F13E1B;
+	--dx-color-title-black: #2D2D2D;
+	--dx-color-input-word: #AAAAAA;
+	--dx-color-light-word: #AAAAAA;
+	--dx-color-regular-word: #666666;
+	--dx-color-division-line: #AAAAAA;
+	--dx-color-division-line-1: #E6E6E6;
+	--dx-color-division-line-2: #F7F7F7;
+	--dx-color-mask: rgba(0,0,0,0.6);
+	--dx-color-btn-active-blue: #2979ff;
+
+	--dx-font-size-light: 60rpx;
+	--dx-font-size-medium: 36rpx;
+	--dx-font-size-medium-1: 34rpx;
+	--dx-font-size-medium-2: 30rpx;
+	--dx-font-size-normal: 28rpx;
+	--dx-font-size-regular: 24rpx;
+	--dx-font-size-regular-2: 22rpx;
+	--dx-font-size-regular-3: 20rpx;
+	/*暂时通过该方式进行类似宏定义，可不断添加*/
+
+	/*以下为修改weui样式*/
+	--weui-TAG-TEXT-GREEN:#5F74FF;
+	--weui-BTN-DEFAULT-COLOR: #5F74FF;
+	--weui-BRAND:#1485ee;
+
+}
+
+.dx-goods-tag{
+	height:28rpx;
+	font-size:20rpx;
+	font-family:PingFangSC-Light,PingFang SC;
+	font-weight:300;
+	color:rgba(241,62,27,1);
+	border-radius:4rpx;
+	margin-right: 14rpx;
+	padding-left: 8rpx;
+	padding-right: 8rpx;
+	border:1rpx solid rgba(255,142,120,1);
+}
+.dx-content{
+	background-color: var(--dx-background);
+}
+
+
+
+.dx-content-empty-tips {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	color:rgba(170,170,170,1);
+
+}
+
+.dx-color-cancel{
+	color:#AAAAAA;
+}
+
+.dx-color-blue{
+	color: var(--dx-color-blue);
+}
+
+.dx-color-light-word{
+	color: var(--dx-color-light-word);
+}
+
+.dx-background{
+	background-color: var(--dx-background);
+}
+
+.dx-button-mini{
+	display: inline-block;
+	width: auto;
+	padding: 0 0.75em;
+	font-size: 14px;
+	line-height: 1.9;
+}
+/*按键封装demo end*/
+
+
+.dx-agree{
+	display: inline;
+	align-content:center;
+}
+
+.dx-agree .dx-agree-text{
+	display: flex;
+	align-items:center;
+	align-content:center;
+	justify-content:center;
+	padding: 16rpx 0;
+	vertical-align: middle;
+}
+
+.dx-error-tip{
+	display: inline-block;
+	margin-top: 8px;
+	padding: 0 32px;
+	color: red;
+}
+
+.dx-flex{
+	display: flex;
+}
+
+.dx-flex-center{
+	display: flex;
+	justify-content: center;
+
+}
+
+.dx-form-title{
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1.36;
+}
+
+.dx-msg-title{
+	margin-bottom: 16px;
+	font-weight: 700;
+	font-size: 22px;
+	color: rgba(0,0,0,0.9);
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.dx-color-pri{
+	color:2979ff;
+}
+
+.dx-card{
+	position: relative;
+	overflow: hidden;
+	font-size: 28rpx;
+	background-color: #ffffff;
+	box-sizing: border-box;
+	border: solid 1px #E1E1E1;
+	border-radius: 16rpx;
+	margin: 20rpx 32rpx;
+}
+
+body{
+	max-width: 640px;
+	margin: auto;
+}
