@@ -8,13 +8,13 @@
 	},
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-//		{
-//			"path": "pages/index/index",
-//			"onReachBottomDistance": 300,
-//			"style": {
-//				"enablePullDownRefresh": true
-//			}
-//		},
+		{
+			"path": "pages/index/index",
+			"onReachBottomDistance": 300,
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
 		{
 			"path": "pages/ele/ele",
 			"onReachBottomDistance": 300,
@@ -186,12 +186,12 @@
 //		"iconWidth": "40rpx",
 //		"fontSize": "20rpx",
 		"list": [
-//			{
-//				"pagePath": "pages/index/index",
-//				"text": "首页",
-//				"iconPath": "/static/tab/home.png",
-//				"selectedIconPath": "/static/tab/home-selected.png"
-//			},
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "/static/tab/home.png",
+				"selectedIconPath": "/static/tab/home-selected.png"
+			},
 			{
 				"pagePath": "pages/ele/ele",
 				"text": "饿了么",

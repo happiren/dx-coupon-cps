@@ -4,7 +4,7 @@ const CONFIG = {
 		debug: true,  //调试信息
         assetsPath: '/static', // 静态资源路径
         baseUrl: 'https://cps.hxq123456.com',  // 后台接口请求地址
-        hostUrl: 'http://dx-cps',        // H5地址(前端运行地址)
+        hostUrl: 'http://cps.hxq123456.com',        // H5地址(前端运行地址)
         websocketUrl: '',        // websocket服务端地址
         weixinAppId: '' ,// 微信公众号appid
         agreement: 'https://cpms-api.jianyb.com/api/v2/h5/help/agreement',

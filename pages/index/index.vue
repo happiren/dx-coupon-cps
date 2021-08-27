@@ -8,10 +8,75 @@
             <view class="wrap">
                 <u-swiper :list="bannerList" @click="onBannerClick"></u-swiper>
             </view>
-            <view @click="goPoster">生成海报</view>
+            <view class="info-title" @click="goArticleList()">
+                <view class="title">
+                    资讯热点
+                </view>
+                <view class="more">
+                    更多
+                </view>
+            </view>
 
-            <view @click="goPoster1">生成海报1</view>
 
+
+            <view class="articles">
+                <view v-for="(item, index) in articleList" :key="index" class="article" @click="onArticleClick(item)">
+                    <view class="square-cover" v-if="item.cover_type == 1">
+                        <view class="left">
+                            <view class="title u-line-2">{{item.title}}</view>
+                            <view class="square-tail">
+                                <view class="square-left">
+                                    <dx-tag :text="item.cat_name" type="primary" font-size="20rpx" padding="12rpx 22rpx" border="none"/>
+                                    <view class="time">{{item.publishStr}}</view>
+                                </view>
+                                <view class="square-right">
+                                    <view class="line">
+                                        <u-icon name="eye" size="30"></u-icon>
+                                        <text style="margin-left: 8rpx; line-height: 37rpx">{{item.view_num}}</text>
+                                    </view>
+                                    <view class="line">
+                                        <u-icon name="heart" size="30"></u-icon>
+                                        <text style="margin-left: 8rpx; line-height: 37rpx">{{item.collect_num}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="right">
+                            <u-image :src="item.image" width="100%" height="200rpx" border-radius="8"></u-image>
+                        </view>
+                    </view>
+                    <view class="rect-cover" v-else-if="item.cover_type == 2">
+                        <view v-if="item.image">
+                            <u-image :src="item.image" mode="widthFix" border-radius="8"></u-image>
+                        </view>
+                        <view class="title u-line-2">{{item.title}}</view>
+
+                    </view>
+                    <view class="no-cover" v-else-if="item.cover_type == 0">
+                        <view class="title u-line-2">{{item.title}}</view>
+                    </view>
+                    <view class="tail" v-if="item.cover_type != 1">
+                        <view class="left">
+                            <dx-tag :text="item.cat_name" type="primary" font-size="20rpx" padding="12rpx 22rpx" border="none"/>
+                            <view class="time">{{item.publishStr}}</view>
+                        </view>
+                        <view class="right">
+                            <view class="line">
+                                <u-icon name="eye" size="30"></u-icon>
+                                <text style="margin-left: 8rpx; line-height: 37rpx">{{item.view_num}}</text>
+                            </view>
+                            <view class="line">
+                                <u-icon name="heart" size="30"></u-icon>
+                                <text style="margin-left: 8rpx; line-height: 37rpx">{{item.collect_num}}</text>
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+            <view v-if="noMoreFlag" style="margin-top: 16rpx; padding-bottom: 32rpx" @click="goArticleList()">
+                <u-divider half-width="200" bgColor="#F8F8F8" color="#2979FF">查看更多</u-divider>
+            </view>
         </view>
     </view>
 </template>
@@ -31,9 +96,10 @@
         components: {DxTag, UGap, UImage},
         data() {
             return {
-				loading:true,
+                loading:true,
                 timer: null,    //定时器
                 showOfficialAccount:true,
+
                 bannerList: [],
                 articleList: [],
                 noMoreFlag: false,
@@ -58,8 +124,22 @@
                 that.loading = false;
             },500 );
 
+            var enctyData = aes.encrypt(word);
+            var decodeData = aes.decrypt(enctyData);
+            // var enctyData = this.encrypt(key, iv, "hello" );
+            // var decodeData = this.decrypt(enctyData, key);
+            console.log(enctyData)
+            console.log(decodeData)
+            utils.timeFormat("2021-01-11T08:40:54","hh:MM")
+            api.home.getBanner().then(res => {
+                this.loading = false;
+                if (res.code = api.SUCCESS) {
+                    this.bannerList = res.data;
+                }
+            })
 
 
+            this.getArticle();
 
         },
         onUnload:function(){
@@ -72,12 +152,7 @@
 
         },
         methods: {
-            goPoster(){
-                utils.navigateTo('/pages/hch-poster/hch-poster');
-            },
-            goPoster1(){
-                utils.navigateTo('/pages/common/poster/poster');
-            },
+
             async onShareAppMessage(res) {
                 log.debug("onShareAppMessage")
                 log.debug(res)
@@ -115,7 +190,7 @@
                 return aes.AES.encrypt(data, key, option).toString();
             },
             //封装解密
-             decrypt(word, key) {
+            decrypt(word, key) {
                 var encryptedHexStr = aes.CryptoJS.format.Hex.parse(word);
                 var decrypt = aes.CryptoJS.AES.decrypt(encryptedHexStr, key, {
                     mode: aes.CryptoJS.mode.ECB,
@@ -131,9 +206,9 @@
                     return;
                 }
 
-				api.article.getArticleList(1, 0, 1, this.page).then(res => {
-				    if (res.code == api.SUCCESS) {
-				        if (res.data.length == 0) {
+                api.article.getArticleList(1, 0, 1, this.page).then(res => {
+                    if (res.code == api.SUCCESS) {
+                        if (res.data.length == 0) {
                             this.noMoreFlag = true;
                         }
                         this.noMoreFlag = true; //获取一次后强制提示没有跟过
@@ -147,7 +222,7 @@
                         this.page = this.page + 1;
                     }
 
-				})
+                })
             },
             onBannerClick(index) {
                 var banner = this.bannerList[index];

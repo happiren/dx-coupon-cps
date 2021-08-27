@@ -28,7 +28,7 @@
 			<view class="copyrihgt" v-if="article.copyright">
 				<text>版权说明：本文来自</text><text>{{article.copyright}}</text><text>，如有侵权，请联系删除！</text>
 			</view>
-			<view class="bottom-tab">
+			<view class="bottom-tab" v-if="false">
 				<view class="left" @click="collectArticle()">
 					<u-icon v-if="!article.collected" name="heart" size="48" color="#585858" ></u-icon>
 					<u-icon v-if="article.collected" name="/static/icon/collected.png" size="48" :color="article.collected ? '#2979ff':'#9A9A9A' " ></u-icon>
@@ -80,7 +80,7 @@
 			log.debug("onShareAppMessage")
 			log.debug(res)
 			let coverImage = await api.common.miniappShareCover();
-			api.article.incShareNum(this.articleId);
+			// api.article.incShareNum(this.articleId);
 			log.debug("coverImage", coverImage);
 
 			return {

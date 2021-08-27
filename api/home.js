@@ -10,7 +10,7 @@ export default {
      * @returns {*}
      */
     getBanner(){
-        return http.get("/api/v2/home/banner/miniapp")
+        return http.get("/api/home/banner/miniapp")
     },
 
 

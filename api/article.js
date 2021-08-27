@@ -24,7 +24,7 @@ export default {
      * @returns {*}
      */
     getArticleList(type, catId, order, page=1){
-        return http.get("/api/v2/common/article/list", {
+        return http.get("/api/common/article/list", {
             type:type,
             catId:catId,
             order:order,
@@ -38,7 +38,7 @@ export default {
      * @returns {*}
      */
     getArticleDetail(articleId){
-        return http.get("/api/v2/common/article/detail", {
+        return http.get("/api/common/article/detail", {
             articleId:articleId
         })
     },
