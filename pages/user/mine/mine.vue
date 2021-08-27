@@ -57,7 +57,7 @@
                                 </view>
                             </view>
                         </view>
-                        <u-icon size="28" color="#969799" name="arrow-right"></u-icon>
+<!--                        <u-icon size="28" color="#969799" name="arrow-right"></u-icon>-->
                     </view>
 
                 </view>
@@ -309,7 +309,8 @@
                     this.processLogin();
                     return;
                 } else {
-                    utils.navigateTo('/pages/user/mine/info/userinfo/userinfo');
+                    //暂时不支持跳转个人详情页面
+                    // utils.navigateTo('/pages/user/mine/info/userinfo/userinfo');
                 }
             },
             checkUnionidLogin(){
