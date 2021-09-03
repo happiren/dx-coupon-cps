@@ -161,7 +161,7 @@
                 log.debug("coverImage", coverImage);
 
                 return {
-                    title: "携筑项目管理",
+                    title: "爱享外卖优惠券",
                     path: "pages/index/index" ,
                     imageUrl: coverImage
                 }
