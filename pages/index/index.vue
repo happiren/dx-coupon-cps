@@ -8,9 +8,9 @@
             <view class="wrap">
                 <u-swiper :list="bannerList" @click="onBannerClick"></u-swiper>
             </view>
-            <view class="info-title" @click="goArticleList()">
+            <view class="info-title" @click="goTaobao()">
                 <view class="title">
-                    资讯热点
+                    优惠券
                 </view>
                 <view class="more">
                     更多
@@ -197,6 +197,9 @@
                     padding: aes.CryptoJS.pad.Pkcs7
                 });
                 return aes.CryptoJS.enc.Utf8.stringify(decrypt);
+            },
+            goTaobao(){
+                utils.navigateTo("/pages/taobao/tbk/search/search")
             },
             goArticleList(){
                 utils.navigateTo("/pages/common/article/list")

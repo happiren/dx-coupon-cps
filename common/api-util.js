@@ -11,6 +11,7 @@ import article from "../api/article.js";
 import message from "../api/message.js";
 import common from "../api/common.js";
 import coupon from "../api/coupon.js";
+import tbk from "../api/tbk.js";
 
 
 
@@ -24,6 +25,7 @@ export default {
 	article:article,
 	message: message,
 	coupon: coupon,
+	tbk: tbk,
 
 	getErrorMessage(code) {
 		return errorCode.getErrorMessage(code).message;

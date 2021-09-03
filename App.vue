@@ -75,6 +75,10 @@
 
     @import "common/iconfont.css";
 
+	/*每个页面公共css 只适用colorui的icon*/
+	/*@import 'colorui/main.css';*/
+	@import 'colorui/icon.css';
+
 	/*每个页面公共css */
     @import "uview-ui/index.scss";
     /*@import "thridui/weui/weui.min.css";*/
