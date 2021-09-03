@@ -1,7 +1,7 @@
 <template>
 	<view class="page">
 		<!-- 搜索 -->
-		<view class="search-head">
+		<view v-if="false" class="search-head">
 			<view class="back" @click="onBack">
 				<text></text>
 			</view>
@@ -14,7 +14,7 @@
 			</view>
 		</view>
 		<!-- 筛选 -->
-		<view class="screen-info">
+		<view v-if="false" class="screen-info">
 			<view class="screen-list">
 				<view class="list" :class="{'action':screenShow===0}" @click="onSynthesize(0)">
 					<text>综合</text>
@@ -127,28 +127,16 @@
 				isDrawer: false,
 				keyword: '',
 				goodsList:[
-				  {
-					id: 1,
-					name: 'BANDALY 2020夏季女装连衣裙韩版大码宽松显瘦套装裙子两件套 JX19301 上豆绿下米白 M ',
-					price: '219.00',
-					vip_price: '129.00',
-					img: '/static/img/goods_thumb_01.png',
-					is_goods: 0,
-				  },{
-					id: 1,
-					name: '花花公子 卫衣男秋季圆领薄款休闲体恤男士时尚长袖T恤外套上衣男生情侣装套头衣服秋天男装 白色 XL',
-					price: '139.00',
-					vip_price: '99.00',
-					img: '/static/img/goods_thumb_02.png',
-					is_goods: 1,
-				  },
+
 				],
 			}
 		},
 		onLoad(params) {
 			this.keyword = decodeURIComponent(params.keyword||'');
+			utils.showLoading("加载中...");
 			api.tbk.search(this.keyword).then(res => {
 				if (res.code == api.SUCCESS) {
+					utils.hideLoading();
 					this.goodsList = res.data;
 				}
 			})
@@ -188,19 +176,21 @@
 				log.debug(item)
 				log.debug(index)
 				log.debug(this.goodsList[index])
+				let url = item.coupon_share_url;
+				if (!url) {
+					url = item.url;
+				}
 				var param = {
 					"itemId": item.item_id,
-					"couponAmount": item.coupon_amount,
-					"couponEndTime": item.coupon_end_time,
-					"couponStartTime": item.coupon_start_time,
-					"couponRemainTime": item.coupon_remain_count,
-					"couponTotalCount": item.coupon_total_count,
-					"couponStartFee": item.coupon_start_fee,
-					"couponShareUrl": encodeURIComponent(item.coupon_share_url),
+					"couponAmount": item.coupon_amount || 0,
+					"couponEndTime": item.coupon_end_time || "",
+					"couponStartTime": item.coupon_start_time || "",
+					"couponRemainTime": item.coupon_remain_count || 0,
+					"couponTotalCount": item.coupon_total_count || 0,
+					"couponStartFee": item.coupon_start_fee || 0,
+					"couponShareUrl": encodeURIComponent(url),
 				}
-				if (!param.couponShareUrl) {
-					param.couponShareUrl = item.url;
-				}
+
 				log.debug("goods info param");
 				log.debug(utils.queryParams(param));
 				utils.navigateTo("/pages/taobao/tbk/goodsDetails/goodsDetails"+ utils.queryParams(param));

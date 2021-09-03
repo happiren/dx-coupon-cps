@@ -22,7 +22,7 @@
 	/* #endif */
 	/* #ifdef MP */
 	height: calc(240rpx + var(--status-bar-height));
-	padding-top: calc(80rpx + var(--status-bar-height));
+	padding-top: calc( var(--status-bar-height));
 	/* #endif */
 	background-color: #ffffff;
 	border-bottom: 2rpx solid #f6f6f6;
@@ -43,7 +43,7 @@
 	.search {
 		display: flex;
 		align-items: center;
-		width: 76%;
+		width: 90%;
 		height: 60rpx;
 		background-color: #f6f6f6;
 		border-radius: 60rpx;
@@ -75,12 +75,12 @@
 /* 搜索记录 */
 .search-record{
 	padding: 0 4%;
-	margin-top: 100rpx;
+	margin-top: 20rpx;
 	/* #ifdef APP-PLUS */
 	margin-top: 200rpx;
 	/* #endif */
 	/* #ifdef MP */
-	margin-top: calc(240rpx + var(--status-bar-height));
+	margin-top: 20rpx;
 	/* #endif */
 	background-color: #FFFFFF;
 	border-bottom: 2rpx solid #f6f6f6;

@@ -91,7 +91,7 @@
 			}
 		},
 		onShow(e) {
-			this.current = 0;
+			
 
 		},
 		onLoad() {

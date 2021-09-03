@@ -1,32 +1,32 @@
 <template>
-	<view 
-	class="mescroll-body mescroll-render-touch" 
+	<view
+	class="mescroll-body mescroll-render-touch"
 	:class="{'mescorll-sticky': sticky}"
-	:style="{'minHeight':minHeight, 'padding-top': padTop, 'padding-bottom': padBottom}" 
-	@touchstart="wxsBiz.touchstartEvent" 
-	@touchmove="wxsBiz.touchmoveEvent" 
-	@touchend="wxsBiz.touchendEvent" 
+	:style="{'minHeight':minHeight, 'padding-top': padTop, 'padding-bottom': padBottom}"
+	@touchstart="wxsBiz.touchstartEvent"
+	@touchmove="wxsBiz.touchmoveEvent"
+	@touchend="wxsBiz.touchendEvent"
 	@touchcancel="wxsBiz.touchendEvent"
 	:change:prop="wxsBiz.propObserver"
 	:prop="wxsProp"
 	>
 		<!-- 状态栏 -->
 		<view v-if="topbar&&statusBarHeight" class="mescroll-topbar" :style="{height: statusBarHeight+'px', background: topbar}"></view>
-		
+
 		<view class="mescroll-body-content mescroll-wxs-content" :style="{ transform: translateY, transition: transition}" :change:prop="wxsBiz.callObserver" :prop="callProp">
 			<!-- 下拉加载区域 (支付宝小程序子组件传参给子子组件仍报单项数据流的异常,暂时不通过mescroll-down组件实现)-->
 			<!-- <mescroll-down :option="mescroll.optDown" :type="downLoadType" :rate="downRate"></mescroll-down> -->
 			<view v-if="mescroll.optDown.use" class="mescroll-downwarp" :style="{'background':mescroll.optDown.bgColor,'color':mescroll.optDown.textColor}">
 				<view class="downwarp-content">
 					<view class="picture">
-						<image src="/static/jiayou.GIF"></image>
+<!--						<image src="/static/jiayou.GIF"></image>-->
 					</view>
 					<view class="downwarp-tip">{{downText}}</view>
 					<!-- <view class="downwarp-progress mescroll-wxs-progress" :class="{'mescroll-rotate': isDownLoading}" :style="{'border-color':mescroll.optDown.textColor, 'transform': downRotate}"></view>
 					<view class="downwarp-tip">{{downText}}</view> -->
 				</view>
 			</view>
-	
+
 			<!-- 列表内容 -->
 			<slot></slot>
 
@@ -45,18 +45,18 @@
 				<view v-if="upLoadType===2" class="upwarp-nodata">{{ mescroll.optUp.textNoMore }}</view>
 			</view>
 		</view>
-		
+
 		<!-- 底部是否偏移TabBar的高度(默认仅在H5端的tab页生效) -->
 		<!-- #ifdef H5 -->
 		<view v-if="bottombar && windowBottom>0" class="mescroll-bottombar" :style="{height: windowBottom+'px'}"></view>
 		<!-- #endif -->
-		
+
 		<!-- 适配iPhoneX -->
 		<view v-if="safearea" class="mescroll-safearea"></view>
-		
+
 		<!-- 回到顶部按钮 (fixed元素需写在transform外面,防止降级为absolute)-->
 		<mescroll-top v-model="isShowToTop" :option="mescroll.optUp.toTop" @click="toTopClick"></mescroll-top>
-		
+
 		<!-- #ifdef MP-WEIXIN || MP-QQ || APP-PLUS || H5 -->
 		<!-- renderjs的数据载体,不可写在mescroll-downwarp内部,避免use为false时,载体丢失,无法更新数据 -->
 		<view :change:prop="renderBiz.propObserver" :prop="wxsProp"></view>
@@ -90,7 +90,7 @@
 	import MescrollTop from './components/mescroll-top.vue';
 	// 引入兼容wxs(含renderjs)写法的mixins
 	import WxsMixin from './wxs/mixins.js';
-	
+
 	export default {
 		mixins: [WxsMixin],
 		components: {
@@ -214,7 +214,7 @@
 		// 使用created初始化mescroll对象; 如果用mounted部分css样式编译到H5会失效
 		created() {
 			let vm = this;
-			
+
 			let diyOption = {
 				// 下拉刷新的配置
 				down: {
@@ -234,7 +234,7 @@
 						vm.downHight = downHight; // 设置下拉区域的高度 (自定义mescroll组件时,此行不可删)
 					},
 					beforeEndDownScroll(mescroll){
-						vm.downLoadType = 4; 
+						vm.downLoadType = 4;
 						return mescroll.optDown.beforeEndDelay // 延时结束的时长
 					},
 					endDownScroll() {

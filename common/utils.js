@@ -480,12 +480,16 @@ function previewImage(url) {
  * 复制到剪切板
  * @param data
  */
-function setClipboardData(data){
+function setClipboardData(data, toast=null){
     uni.setClipboardData({
         data: data,
         success: () => { //复制成功的回调函数
+            let message = toast;
+            if (!message) {
+                message = "复制成功";
+            }
             uni.showToast({
-                title:"复制成功",
+                title: message,
                 duration:2000,
                 icon:"none"
             });

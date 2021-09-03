@@ -100,7 +100,7 @@
             "path" : "pages/taobao/tbk/search/search",
             "style" :
             {
-				"navigationStyle": "custom",
+
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
@@ -110,6 +110,7 @@
             "path" : "pages/taobao/tbk/searchGoodsList/searchGoodsList",
             "style" :
             {
+
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }

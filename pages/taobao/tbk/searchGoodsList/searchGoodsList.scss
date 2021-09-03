@@ -75,15 +75,15 @@
 
 /* 筛选 */
 .screen-info {
-	position: fixed;
+	//position: fixed;
 	left: 0;
-	top: 100rpx;
+	//top: 100rpx;
 	z-index: 11;
 	/* #ifdef APP-PLUS */
-	top: 150rpx;
+	//top: 150rpx;
 	/* #endif */
 	/* #ifdef MP */
-	top: calc(200rpx + var(--status-bar-height));
+	//top: calc(200rpx + var(--status-bar-height));
 	/* #endif */
 	width: 100%;
 	height: 100rpx;
@@ -182,12 +182,12 @@
 /* 商品列表 */
 .goods-data {
 	width: 100%;
-	margin-top: 220rpx;
+	//margin-top: 220rpx;
 	/* #ifdef APP-PLUS */
-	margin-top: 270rpx;
+	//margin-top: 270rpx;
 	/* #endif */
 	/* #ifdef MP */
-	margin-top: calc(320rpx + var(--status-bar-height));
+	//margin-top: calc(320rpx + var(--status-bar-height));
 	/* #endif */
 	.goods-list {
 		padding: 0 25rpx;

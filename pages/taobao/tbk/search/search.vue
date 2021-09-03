@@ -1,18 +1,23 @@
 <template>
 	<view class="page">
 		<!-- 搜索 -->
-		<view class="search-head">
-			<view class="back" @click="onBack">
-				<text></text>
-			</view>
-			<view class="search">
-				<text class="cuIcon-search"></text>
-				<u-input type="text" v-model="keyword" placeholder="搜索商品" />
-			</view>
-			<view class="btn" @click="onSearch">
-				<text>搜索</text>
-			</view>
+		<view style="margin: 0 32rpx;">
+			<u-search placeholder="搜索商品优惠券" v-model="keyword" :clearabled="true" :show-action="true" @search="onSearch" @custom="onSearch"></u-search>
 		</view>
+
+<!--		<view class="search-head">-->
+<!--			<view class="back" @click="onBack">-->
+<!--				<text></text>-->
+<!--			</view>-->
+<!--			<u-search placeholder="搜索商品优惠券" v-model="keyword" :clearabled="true" :show-action="true" @search="onSearch" @custom="onSearch"></u-search>-->
+<!--			<view class="search">-->
+<!--				<text class="cuIcon-search"></text>-->
+<!--				<u-input type="text" v-model="keyword" placeholder="搜索商品优惠券" />-->
+<!--			</view>-->
+<!--			<view class="btn" @click="onSearch">-->
+<!--				<text>搜索</text>-->
+<!--			</view>-->
+<!--		</view>-->
 		<!-- 搜索历史 -->
 		<view class="search-record">
 			<view class="search-title">

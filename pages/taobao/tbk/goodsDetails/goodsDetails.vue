@@ -324,17 +324,20 @@
     </view>
     <view>
       <view v-if="taoCode" class="dx-card taocode-success">
-        <text>{{taoCode.model}}</text>
+        <u-input v-model="inputModel" type="textarea" placeholder="淘口令内容"></u-input>
         <br>
         <text>淘口令复制完成，请到淘宝天猫打开</text>
       </view>
-      <view @click="getTaoCode()" style="padding: 16rpx">
+      <view v-if="couponAmount > 0" @click="getTaoCode()" style="padding: 16rpx">
         <DxCoupon  theme="red" color="#FFF">
           <view style="line-height: 1.7">
             <view>{{couponAmount}}元券</view>
             <view>有效期：{{couponEndTime}}</view>
           </view>
         </DxCoupon>
+      </view>
+      <view v-if="couponAmount <= 0" style="margin: 16rpx">
+        <u-button type="primary" hover-class="none" :custom-style="customStyle" @click="getTaoCode()">复制淘口令</u-button>
       </view>
     </view>
     <u-gap height="16"></u-gap>
@@ -353,10 +356,14 @@ import api from '@/common/api-util.js'
 import log from '@/common/log-util.js'
 import UGap from "../../../../uview-ui/components/u-gap/u-gap";
 import DxCoupon from '@/components/dx-coupon/dx-coupon.vue';
+import UInput from "../../../../uview-ui/components/u-input/u-input";
+import UButton from "../../../../uview-ui/components/u-button/u-button";
 
 export default {
 
   components: {
+    UButton,
+    UInput,
     UGap,
     GoodsServe,
     GoodsCoupon,
@@ -379,6 +386,7 @@ export default {
       couponShareUrl:null,
       bannerList:[],
       taoCode:null,
+      inputModel:null,
       customStyle: {
         margin: "16rpx",
         color: '#FFF',
@@ -444,9 +452,11 @@ export default {
       log.debug("getTaoCode")
       api.tbk.getTaoCode(this.couponShareUrl).then(res => {
         if (res.code == api.SUCCESS) {
+          this.inputModel = res.data.model;
           this.taoCode = res.data;
-          utils.setClipboardData(res.data.model);
-          utils.toast("复制淘口令成功！")
+          utils.setClipboardData(res.data.model, "淘口令复制成功！");
+
+
         }
       })
     },
