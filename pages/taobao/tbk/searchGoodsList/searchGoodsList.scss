@@ -196,7 +196,7 @@
 		.list-view {
 			float: left;
 			width: 49%;
-			height: 560rpx;
+			height: 580rpx;
 			background-color: #ffffff;
 			border-radius: 20rpx;
 			margin-right: 2%;
@@ -213,7 +213,7 @@
 			.item {
 				width: 100%;
 				.title {
-					padding: 20rpx;
+					padding: 10rpx;
 					text {
 						width: 100%;
 						color: #212121;
@@ -221,7 +221,7 @@
 					}
 				}
 				.price {
-					padding: 0 20rpx;
+					padding: 0 10rpx;
 					.retail-price {
 						display: flex;
 						align-items: flex-end;
@@ -279,6 +279,11 @@
 						}
 					}
 				}
+			}
+			.shop-title{
+				padding: 10rpx;
+				font-size: 22rpx;
+				color: #82848a;
 			}
 		}
 		.list-view:nth-child(2n) {

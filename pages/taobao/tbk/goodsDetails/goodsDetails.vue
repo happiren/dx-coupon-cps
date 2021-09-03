@@ -8,7 +8,7 @@
 <!--        </view>-->
 <!--      </view>-->
       <!-- tab切换 -->
-      <view class="head-tab" v-if="PageScrollTop > 120">
+      <view  class="head-tab" v-if="PageScrollTop > 120 && false">
         <view class="tab" :class="{'action':TabShow===0}" @click="onTab(0)">
           <text>商品</text>
           <text class="line"></text>

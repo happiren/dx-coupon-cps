@@ -76,12 +76,13 @@
 										<text>领券减{{item.coupon_amount}}</text>
 									</view>
 								</view>
-								<view class="vip-price">
-									<text class="min"></text>
-									<text class="max"></text>
-								</view>
+<!--								<view class="vip-price">-->
+<!--									<text class="min"></text>-->
+<!--									<text class="max"></text>-->
+<!--								</view>-->
 							</view>
 						</view>
+						<view class="shop-title">{{item.shop_title}}</view>
 					</view>
 				</view>
 			</mescroll-body>
