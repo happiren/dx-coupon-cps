@@ -13,6 +13,19 @@ export default {
         return http.get("/api/home/banner/miniapp")
     },
 
+    /**
+     * 获取首页导航
+     * @returns {*}
+     */
+    getNavigation(){
+        return http.get("/api/home/navigation/miniapp")
+    },
+
+    getCouponCard(){
+        return http.get("/api/home/coupon/miniapp")
+    },
+
+
 
     /***************************************************** 首页 end *********************************************/
 }

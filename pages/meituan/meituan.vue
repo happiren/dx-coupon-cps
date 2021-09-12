@@ -91,16 +91,20 @@
 			}
 		},
 		onShow(e) {
-			
+
 
 		},
-		onLoad() {
+		onLoad(options) {
 			this.loading = false;
+
+			if (this.$store.getters.tabParam) {
+				this.current = parseInt(this.$store.getters.tabParam);
+				this.$store.commit('tabParam', "");
+			}
 			api.coupon.meituanCoupon().then(res => {
 				if (res.code = api.SUCCESS) {
 					this.loading = true;
 					this.activities = res.data;
-					this.current = 0;
 					console.log("activities", this.activities)
 					this.theme = JSON.parse( this.activities[this.current].theme);
 					this.qrcode = this.activities[this.current].qrcode;

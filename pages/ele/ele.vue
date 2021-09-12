@@ -100,8 +100,12 @@
 			this.current = 0;
 
 		},
-		onLoad() {
+		onLoad(options) {
 			this.loading = false;
+			if (this.$store.getters.tabParam) {
+				this.current = parseInt(this.$store.getters.tabParam);
+				this.$store.commit('tabParam', "");
+			}
 			api.coupon.eleCoupon().then(res => {
 				if (res.code = api.SUCCESS) {
 					this.loading = true;

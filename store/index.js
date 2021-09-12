@@ -17,6 +17,7 @@ const store = new Vuex.Store({
 		sessionKey: "",
 		projectInfo:{},
 		projectPermissions: [],
+		tabParam: "",
 		//网络状态
 		networkState: 'unknown',
 		version: "2.0.0", //小程序版本
@@ -32,6 +33,9 @@ const store = new Vuex.Store({
 		},
 		token: state => {
 			return state.token;
+		},
+		tabParam: state => {
+			return state.tabParam;
 		},
 		showDebugInfo: state => {
 			return state.showDebugInfo;
@@ -70,7 +74,9 @@ const store = new Vuex.Store({
 			state.login = login;
 		},
 
-
+		tabParam(state, val) {
+			state.tabParam = val;
+		},
 		userInfo(state, userInfo){
 			// state.login = true;
 			state.userInfo = userInfo;

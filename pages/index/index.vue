@@ -6,8 +6,74 @@
         </view>
         <view v-else="loading">
             <view class="wrap">
-                <u-swiper :list="bannerList" @click="onBannerClick"></u-swiper>
+                <view class="banner">
+                    <u-swiper :list="bannerList" @click="onBannerClick"></u-swiper>
+                </view>
             </view>
+
+            <swiper class="swiper" v-if="navList.length > 1" :autoplay="false" :vertical="false" :interval="4000"
+                    :circular="true" :indicator-dots="navList.length > 0" indicator-color="rgba(0, 0, 0, 0.1)" indicator-active-color="rgba(0, 0, 0, 0.2)"
+                    >
+                <swiper-item v-for="(list, listIndex) in navList"  :key="listIndex">
+                        <u-grid :col="5" :border="false">
+                            <u-grid-item class="nav" v-for="(item, index) in list" :custom-style="{padding: '40rpx 0 0 0'}" @click="navClick(item)" :key="index">
+                                <u-icon class="icon" :name="item.image"  :size="80"></u-icon>
+                                <view class="text" >{{item.title}}</view>
+                            </u-grid-item>
+                        </u-grid>
+
+                </swiper-item>
+            </swiper>
+            <view class="swiper"  v-else="navList.length > 1">
+                <u-grid :col="5" :border="false">
+                    <u-grid-item class="nav" v-for="(item, index) in navList[0]" :custom-style="{padding: '40rpx 0 0 0'}" @click="navClick(item)">
+                        <u-icon class="icon" :name="item.image" :size="80"></u-icon>
+                        <view class="text">{{item.title}}</view>
+                    </u-grid-item>
+                </u-grid>
+            </view>
+
+<!--            <view style="margin: 0 20rpx;">-->
+<!--                <DxCoupon  theme="#FFF" color="#33333">-->
+<!--                    <image src="/static/temp/14-34-15.png" style="width: 50px; height: 50px; top:-20rpx; left:-20rpx"></image>-->
+<!--                    <view style="line-height: 1.7">-->
+<!--                        <view>饿了么天天抢红包</view>-->
+<!--                        <view>有效期：2</view>-->
+<!--                    </view>-->
+<!--                    <view slot="right">-->
+<!--                        hello-->
+<!--                    </view>-->
+<!--                </DxCoupon>-->
+<!--            </view>-->
+            <view style="margin: 0 20rpx">
+
+                <view v-for="(item, index) in couponCards" :key="index" @click="couponCardClick(item)">
+                    <DxCouponCard  :coupon="item" color="#000" theme="#FFF">
+                    </DxCouponCard>
+                </view>
+
+
+
+<!--                <view class="coupon-item" :style="{backgroundColor: '#FFF', color:'#000'}">-->
+<!--                    <image src="/static/temp/14-34-15.png" style="position: absolute; width: 50px; height: 50px;  left:0rpx"></image>-->
+<!--                    <view class="coupon-left">-->
+<!--                        <view style="line-height: 1.7; margin: 10rpx 50rpx">-->
+<!--                            <view class="title">饿了么天天抢红包</view>-->
+<!--                            <view style="color: #FF304D; line-height: 1.2;">-->
+<!--                                <text style="font-size: 50rpx">66</text><text style="margin: 0 8rpx">元</text><text style="background-color:#FFEBE3; color: #fa5151; padding: 0 8rpx">今日仅剩156个</text>-->
+<!--                            </view>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                    <view class="coupon-right">-->
+<!--                            <dx-tag style="margin-left: 30rpx" color="#fff" text="免费领取" shape="circle" bg-color="#FF5C74" border-color="#FF5C74" padding="18rpx 30rpx"></dx-tag>-->
+<!--                    </view>-->
+<!--                </view>-->
+            </view>
+
+
+
+
+
             <view class="info-title" @click="goTaobao()">
                 <view class="title">
                     优惠券
@@ -89,19 +155,22 @@
     import log from '@/common/log-util.js'
     import UImage from "../../uview-ui/components/u-image/u-image";
     import UGap from "../../uview-ui/components/u-gap/u-gap";
-
+    import DxCoupon from '@/components/dx-coupon/dx-coupon';
+    import DxCouponCard from '@/components/dx-coupon-card/dx-coupon-card';
     import aes from '@/common/aes.js'
     import DxTag from "../../components/dx-tag/dx-tag";
+    import UTag from "../../uview-ui/components/u-tag/u-tag";
     export default {
-        components: {DxTag, UGap, UImage},
+        components: {UTag, DxTag, UGap, UImage, DxCouponCard},
         data() {
             return {
                 loading:true,
                 timer: null,    //定时器
                 showOfficialAccount:true,
-
                 bannerList: [],
+                navList:[],
                 articleList: [],
+                couponCards:[],
                 noMoreFlag: false,
             }
         },
@@ -137,6 +206,25 @@
                     this.bannerList = res.data;
                 }
             })
+            api.home.getNavigation().then(res => {
+                if (res.code = api.SUCCESS) {
+                    this.navList = [];
+                    for(let i=0; i<res.data.length / 10; i++) {
+                        let end = (i + 1) * 10;
+                        end = end <= res.data.length ? end : res.data.length;
+                        let nav = [];
+                        for (let j=i*10; j<end; j++) {
+                            nav.push(res.data[j]);
+                        }
+                        this.navList.push(nav);
+                    }
+                }
+            })
+            api.home.getCouponCard().then(res => {
+                if (res.code == api.SUCCESS) {
+                    this.couponCards = res.data;
+                }
+            })
 
 
             this.getArticle();
@@ -156,18 +244,21 @@
             async onShareAppMessage(res) {
                 log.debug("onShareAppMessage")
                 log.debug(res)
-
                 let coverImage = await api.common.miniappShareCover();
                 log.debug("coverImage", coverImage);
-
                 return {
                     title: "爱享外卖优惠券",
                     path: "pages/index/index" ,
                     imageUrl: coverImage
                 }
             },
-
-
+            navClick(item) {
+                log.debug("navClick", item);
+                commonFun.clickNavigate(item.action, item.action_param, item.action_appid)
+            },
+            couponCardClick(coupon) {
+                commonFun.clickNavigate(coupon.action, coupon.action_param, coupon.action_appid)
+            },
 
             //封装加密
             //  encrypt(word, key) {
@@ -230,7 +321,7 @@
             onBannerClick(index) {
                 var banner = this.bannerList[index];
                 log.debug(banner);
-                commonFun.clickNavigate(banner.action, banner.action_param)
+                commonFun.clickNavigate(banner.action, banner.action_param, banner.action_appid)
                 if (banner.action == 5){
                     utils.navigateTo("/pages/index/projectjoin/projectjoin?scene=" + banner.action_param)
                 }
@@ -254,7 +345,10 @@
     }
 
     .wrap{
-        margin: 24rpx 20rpx;
+        background-color: #FFF;
+        .banner {
+            margin: 0rpx 20rpx;
+        }
     }
     .content {
         display: flex;
@@ -268,6 +362,77 @@
     /*    color: #606266;*/
     /*    line-height: 1.7;*/
     /*}*/
+
+    .swiper{
+        background-color: #FFF;
+        height: 370rpx;
+        .nav{
+            .icon {
+                border-radius: 50%;
+                width: 80rpx;
+                height: 80rpx;
+            }
+            .text {
+                margin-top: 8rpx;
+                font-size: 24rpx;
+                line-height: 34rpx;
+                color: #333333;
+            }
+        }
+    }
+
+    .coupon-item {
+        width:100%;
+        height:auto;
+        display:flex;
+        border-radius:20rpx;
+        padding:0 20rpx;
+        margin-top:20rpx;
+        border:1px solid #eeeeee;
+        position:relative;
+
+        .coupon-left {
+            flex-basis: 465rpx;
+            width:465rpx;
+            height:auto;
+            padding:26rpx 0;
+            border-style:none dotted none none;
+            border-color:#eeeeee;
+            .title{
+                font-weight: 500;
+            }
+        }
+        .coupon-right{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+    }
+    .coupon-item:after {
+        width:20rpx;
+        height:10rpx;
+        position:absolute;
+        left:470rpx; top:-1px;
+        border-radius:0 0 40rpx 40rpx;
+        content:""; display:block;
+        background:#F5F5F5;
+        border:1px solid #eeeeee;
+        border-top:0px;
+    }
+    .coupon-item:before {
+        width:20rpx;
+        height:10rpx;
+        position:absolute;
+        left:470rpx;
+        bottom:-1px;
+        border-radius:40rpx 40rpx 0 0;
+        content:"";
+        display:block;
+        background:#F5F5F5;
+        border:1px solid #eeeeee;
+        border-bottom:0px;
+    }
 
     .info-title {
         display: flex;
@@ -285,6 +450,8 @@
             color: #929292;
         }
     }
+
+
 
     .article{
         position: relative;
