@@ -97,22 +97,19 @@
 			}
 		},
 		onShow(e) {
-			this.current = 0;
-
-		},
-		onLoad(options) {
-			this.loading = false;
 			if (this.$store.getters.tabParam) {
 				this.current = parseInt(this.$store.getters.tabParam);
 				this.$store.commit('tabParam', "");
 			}
+		},
+		onLoad(options) {
+			this.loading = false;
 			api.coupon.eleCoupon().then(res => {
 				if (res.code = api.SUCCESS) {
 					this.loading = true;
 					this.activities = res.data;
-					this.current = 0;
+					// this.current = 0;
 					this.change(0);
-
 				}
 			})
 		},

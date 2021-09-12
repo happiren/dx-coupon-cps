@@ -530,7 +530,7 @@ function navigateToMiniProgram(appId, path) {
 
         },
         fail:function (res) {
-            log.error("navigateToMiniProgram fail", res)
+            console.debug("navigateToMiniProgram fail", res)
             uni.showToast({
                 title:"跳转小程序失败",
                 duration:2000,

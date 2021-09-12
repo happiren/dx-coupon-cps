@@ -92,15 +92,15 @@
 		},
 		onShow(e) {
 
-
-		},
-		onLoad(options) {
-			this.loading = false;
-
 			if (this.$store.getters.tabParam) {
 				this.current = parseInt(this.$store.getters.tabParam);
 				this.$store.commit('tabParam', "");
 			}
+		},
+		onLoad(options) {
+			this.loading = false;
+
+
 			api.coupon.meituanCoupon().then(res => {
 				if (res.code = api.SUCCESS) {
 					this.loading = true;
@@ -147,7 +147,6 @@
 			// 切换
 			change(index) {
 				this.current = index;
-
 				console.log("activity",this.activities[this.current])
 				this.theme = JSON.parse(this.activities[this.current].theme);
 				this.qrcode = this.activities[this.current].qrcode;

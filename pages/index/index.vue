@@ -11,7 +11,7 @@
                 </view>
             </view>
 
-            <swiper class="swiper" v-if="navList.length > 1" :autoplay="false" :vertical="false" :interval="4000"
+            <swiper class="swiper" style="height: 370rpx;" v-if="navList.length > 1" :autoplay="false" :vertical="false" :interval="4000"
                     :circular="true" :indicator-dots="navList.length > 0" indicator-color="rgba(0, 0, 0, 0.1)" indicator-active-color="rgba(0, 0, 0, 0.2)"
                     >
                 <swiper-item v-for="(list, listIndex) in navList"  :key="listIndex">
@@ -21,7 +21,6 @@
                                 <view class="text" >{{item.title}}</view>
                             </u-grid-item>
                         </u-grid>
-
                 </swiper-item>
             </swiper>
             <view class="swiper"  v-else="navList.length > 1">
@@ -31,6 +30,7 @@
                         <view class="text">{{item.title}}</view>
                     </u-grid-item>
                 </u-grid>
+                <u-gap height="40"></u-gap>
             </view>
 
 <!--            <view style="margin: 0 20rpx;">-->
@@ -365,7 +365,7 @@
 
     .swiper{
         background-color: #FFF;
-        height: 370rpx;
+
         .nav{
             .icon {
                 border-radius: 50%;
