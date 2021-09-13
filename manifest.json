@@ -87,5 +87,9 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "h5" : {
+        "title" : "爱享外卖优惠券",
+        "domain" : "http://cps.hxq123456.com"
     }
 }

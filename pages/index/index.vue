@@ -254,7 +254,28 @@
             },
             navClick(item) {
                 log.debug("navClick", item);
-                commonFun.clickNavigate(item.action, item.action_param, item.action_appid)
+                if (item.action == 5) { //外部转链H5
+                    api.home.getNavigationConvertUrl(item.id).then( res => {
+                        if (res.code == api.SUCCESS) {
+                            //#ifdef H5
+                                log.debug("naviaget to:", res.data);
+                                if (res.data && res.data.startsWith("http")) {
+                                    window.location.href = res.data;
+                                }
+                                utils.navigateTo(res.data);
+                            //#endif
+                            //#ifndef H5
+                                let url = res.data;
+                                if (!url) {
+                                    url = item.action_appid;
+                                }
+                                utils.navigateTo("/pages/webview/webview/webview?url=" + url);
+                            //#endif
+                        }
+                    });
+                } else {
+                    commonFun.clickNavigate(item.action, item.action_param, item.action_appid)
+                }
             },
             couponCardClick(coupon) {
                 commonFun.clickNavigate(coupon.action, coupon.action_param, coupon.action_appid)

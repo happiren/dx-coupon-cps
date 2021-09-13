@@ -35,6 +35,15 @@
 			}
 		},
 		{
+			"path": "pages/life/arrive/arrive",
+			"onReachBottomDistance": 300,
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white", // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/index/debug",
 			"onReachBottomDistance": 300
 		},
@@ -252,6 +261,13 @@
 				"onReachBottomDistance": 300,
 				 "iconPath": "/static/tab/meituan.png",
 				 "selectedIconPath": "/static/tab/meituan-selected.png"
+			},
+			{
+				"path": "pages/life/arrive/arrive",
+				"text": "生活",
+				"onReachBottomDistance": 300,
+				"iconPath": "/static/tab/meituan.png",
+				"selectedIconPath": "/static/tab/meituan-selected.png"
 			},
 
 			{

@@ -21,6 +21,17 @@ export default {
         return http.get("/api/home/navigation/miniapp")
     },
 
+    /**
+     * 获取转链
+     * @param id
+     * @returns {*}
+     */
+    getNavigationConvertUrl(navigationId){
+        return http.get("/api/common/navigation/convert", {
+            navigationId: navigationId,
+        })
+    },
+
     getCouponCard(){
         return http.get("/api/home/coupon/miniapp")
     },

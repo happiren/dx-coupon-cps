@@ -541,6 +541,30 @@ function navigateToMiniProgram(appId, path) {
     })
 }
 
+/**
+ * 获取授权
+ */
+async function getLocationAuth() {
+    // 获取授权
+    const [authorizeErr, authorizeRes] = await uni.authorize({
+        scope: "scope.userLocation",
+        success(data) {
+            console.log(data)
+        },
+        fail(data) {
+            console.log(data)
+        }
+    });
+    console.log(authorizeErr, authorizeRes);
+    // 授权失败
+    if (authorizeErr) {
+        return false;
+    }
+    return true;
+}
+
+
+
 export default {
     isEmpty: isEmpty,
     formatDate: formatDate,
@@ -569,6 +593,7 @@ export default {
     previewImage: previewImage,
     setClipboardData: setClipboardData,
     playAudio: playAudio,
+    getLocationAuth: getLocationAuth,
 
 }
 

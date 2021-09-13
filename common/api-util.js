@@ -12,6 +12,7 @@ import message from "../api/message.js";
 import common from "../api/common.js";
 import coupon from "../api/coupon.js";
 import tbk from "../api/tbk.js";
+import mt from "../api/mt.js";
 
 
 
@@ -26,6 +27,7 @@ export default {
 	message: message,
 	coupon: coupon,
 	tbk: tbk,
+	mt: mt,
 
 	getErrorMessage(code) {
 		return errorCode.getErrorMessage(code).message;
