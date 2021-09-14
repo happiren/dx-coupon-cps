@@ -13,7 +13,7 @@
         <text class="title clamp">{{ item.shopInfo.shopName }}</text>
         <view class="desc">
           <view class="score">
-            <u-rate :count="5" v-model="item.shopInfo.shopPower / 10" :disabled="true"></u-rate>
+            <u-rate :count="5" :current="item.shopInfo.shopPower / 10" :disabled="true"></u-rate>
 <!--            <uni-rate-->
 <!--              :readonly="true"-->
 <!--              :value="item.shopInfo.shopPower / 10"-->
@@ -38,7 +38,7 @@
           </view>
         </view>
         <view class="coupons-more">
-          <view class="info">券后价 {{  Math.floor(item.dealBaseInfo.finalPrice / 100) }} 元</view>
+          <view class="info">券后 {{  Math.floor(item.dealBaseInfo.finalPrice / 100) }} 元</view>
           <view class="coupon-btn"
             >领券省{{ Math.floor((item.dealBaseInfo.marketPrice - item.dealBaseInfo.finalPrice) / 100) }}元</view
           >
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import utils from "../../common/utils";
+
 export default {
   data() {
     return {};
@@ -64,7 +66,12 @@ export default {
       type: String,
       default: "",
     },
+    appId: {
+      type: String,
+      default: "",
+    },
   },
+
 
   methods: {
     navTo(item) {
@@ -74,10 +81,7 @@ export default {
           url: `${this.baseUrl}?shopId=${shopId}`,
         });
       } else {
-        uni.navigateToMiniProgram({
-          appId: item.couponInfo.package.minapp.appid,
-          path: item.couponInfo.package.minapp.path,
-        });
+        utils.navigateToMiniProgram(this.appId, item.couponInfo.miniProgramUrl);
       }
     },
   },

@@ -74,9 +74,9 @@
 
 
 
-            <view class="info-title" @click="goTaobao()">
+            <view class="info-title" @click="goArticleList()">
                 <view class="title">
-                    优惠券
+                    资讯
                 </view>
                 <view class="more">
                     更多
@@ -144,6 +144,7 @@
                 <u-divider half-width="200" bgColor="#F8F8F8" color="#2979FF">查看更多</u-divider>
             </view>
         </view>
+        <dx-tabbar v-model="tabBarIndex" @change="tabBarChange"></dx-tabbar>
     </view>
 </template>
 
@@ -164,6 +165,7 @@
         components: {UTag, DxTag, UGap, UImage, DxCouponCard},
         data() {
             return {
+                tabBarIndex: 2,
                 loading:true,
                 timer: null,    //定时器
                 showOfficialAccount:true,
@@ -186,6 +188,7 @@
             // this.getArticle();
         },
         onLoad() {
+            // uni.hideTabBar();
             let that = this;
             var word = "hello";
 
@@ -240,7 +243,9 @@
 
         },
         methods: {
-
+            tabBarChange(e){
+                log.debug("tabBarChange", e)
+            },
             async onShareAppMessage(res) {
                 log.debug("onShareAppMessage")
                 log.debug(res)

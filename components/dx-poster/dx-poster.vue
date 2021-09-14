@@ -68,7 +68,10 @@
        */
       poster() {
         let data = this.posterData
-        let system = this.system
+        let system = this.system;
+        if (!data.poster) {
+          return ;
+        }
         console.log("posterData", data);
         let posterBg = {
           url: data.poster.url,
@@ -90,8 +93,9 @@
       mainImg() {
         let data = this.posterData
         let system = this.system
+
         //判断是否需要主图
-        if (!data.mainImg || !data.mainImg.url) {
+        if (!this.poster || !data.mainImg || !data.mainImg.url) {
           return null;
         }
         let posterMain = {
@@ -133,6 +137,9 @@
       codeImg() {
         let data = this.posterData
         let system = this.system
+        if (!this.poster) {
+          return null;
+        }
         console.log(" this.poster",  this.poster)
         let posterCode = {
           url: data.codeImg.url,
@@ -166,6 +173,9 @@
        * @author: hch
        */
       async creatPoster() {
+        if (!this.poster) {
+          return null;
+        }
         uni.showLoading({
           title: '生成海报中...'
         })
@@ -175,6 +185,7 @@
         ctx.draw() //清空之前的海报
         // 根据设备屏幕大小和距离屏幕上下左右距离，及圆角绘制背景
         let poster = this.poster
+
         let mainImg = this.mainImg
         let codeImg = this.codeImg
         let title = this.title
@@ -238,6 +249,9 @@
        * @author: hch
        */
       handleSaveCanvasImage() {
+        if (!this.poster) {
+          return null;
+        }
         uni.showLoading({
           title: '保存中...'
         })

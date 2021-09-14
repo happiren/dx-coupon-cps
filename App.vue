@@ -7,6 +7,7 @@
 
 	export default {
 		 onLaunch: function() {
+             uni.hideTabBar()
 		     console.log('App Launch')
              // #ifdef MP-WEIXIN
              const accountInfo = wx.getAccountInfoSync();
@@ -14,6 +15,8 @@
              // #endif
 
              this.userInit();
+
+
 
 
 

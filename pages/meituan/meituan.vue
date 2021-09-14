@@ -39,6 +39,7 @@
 				</view>
 			</view>
 		</view>
+		<dx-tabbar v-model="tabBarIndex"></dx-tabbar>
 	</view>
 </template>
 
@@ -55,6 +56,7 @@
 		},
 		data() {
 			return {
+				tabBarIndex: 2,
 				loading: false,
 				activities: [
 

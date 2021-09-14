@@ -43,6 +43,7 @@
 				</view>
 			</view>
 		</view>
+		<dx-tabbar v-model="tabBarIndex"></dx-tabbar>
 	</view>
 </template>
 
@@ -52,13 +53,16 @@
 	import utils from '@/common/utils.js'
 	import api from '@/common/api-util.js'
 	import shareHb from '../../components/share_hb2/share_hb2.vue'
+	import DxTabbar from "../../components/dx-tabbar/dx-tabbar";
 
 	export default {
 		components: {
+			DxTabbar,
 			shareHb
 		},
 		data() {
 			return {
+				tabBarIndex:1,
 				loading: false,
 				activities: [
 						{

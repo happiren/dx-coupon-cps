@@ -546,7 +546,8 @@ function navigateToMiniProgram(appId, path) {
  */
 async function getLocationAuth() {
     // 获取授权
-    const [authorizeErr, authorizeRes] = await uni.authorize({
+    // const [authorizeErr, authorizeRes] = await
+    uni.authorize({
         scope: "scope.userLocation",
         success(data) {
             console.log(data)
@@ -555,11 +556,11 @@ async function getLocationAuth() {
             console.log(data)
         }
     });
-    console.log(authorizeErr, authorizeRes);
-    // 授权失败
-    if (authorizeErr) {
-        return false;
-    }
+    // console.log(authorizeErr, authorizeRes);
+    // // 授权失败
+    // if (authorizeErr) {
+    //     return false;
+    // }
     return true;
 }
 

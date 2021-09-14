@@ -3,8 +3,8 @@
 		<!-- 顶部筛选 分类栏 -->
 		<u-sticky h5-nav-height="0">
 			<view class="nav-bar choose-address">
-				<view class="city" @click="openPopup">{{ city }}</view>
-				<u-search placeholder="搜索门店找优惠" v-model="keywords" @search="search" @custom="search"></u-search>
+				<view class="city" @click="openPopup">{{ city }}</view><u-icon @click="openPopup" style="margin: 0 16rpx 0 0" name="arrow-down" size="14"></u-icon>
+				<u-search placeholder="搜索门店找优惠" v-model="keywords" :show-action="false" @search="search" @custom="search"></u-search>
 			</view>
 			<view class="sticky-box">
 				<u-tabs :list="tabList" :is-scroll="true" :current="tabCurrent" :bar-style="barStyle"
@@ -16,30 +16,36 @@
 						<view class="item" :class="{ active: !!aroundOpen }" @click="openMenu('aroundOpen')">
 							<text>{{ aroundTitle }}</text>
 							<view class="arrow">
-								<uni-icons type="arrowdown" size="12"></uni-icons>
+								<u-icon name="arrow-down" size="12"></u-icon>
+<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 						<view class="item" :class="{ active: !!allOpen }" @click="openMenu('allOpen')">
 							<text>{{ allTitle }}</text>
 							<view class="arrow">
-								<uni-icons type="arrowdown" size="12"></uni-icons>
+								<u-icon name="arrow-down" size="12"></u-icon>
+<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 						<view class="item" :class="{ active: !!sortOpen }" @click="openMenu('sortOpen')">
 							<text>{{ sortTitle }}</text>
 							<view class="arrow">
-								<uni-icons type="arrowdown" size="12"></uni-icons>
+								<u-icon name="arrow-down" size="12"></u-icon>
+<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 						<view class="item" :class="{ active: !!filterOpen }" @click="openMenu('filterOpen')">
 							<text>筛选</text>
 							<view class="arrow">
-								<uni-icons type="arrowdown" size="12"></uni-icons>
+								<u-icon name="arrow-down" size="12"></u-icon>
+<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 					</view>
 				</view>
+<!--				<u-mask :show="showMenuMask" @click="showMenuMask = false"></u-mask>-->
 				<view class="dropdown">
+
 					<view class="menu" v-if="aroundOpen">
 						<view class="item b-b" v-for="item in aroundList" @click="handleMenuItem('radii', item)"
 							:key="item.id">{{ item.title }}</view>
@@ -47,7 +53,7 @@
 					<scroll-view style="height: 520rpx" scroll-y="true" v-if="allOpen">
 						<view class="menu menu-cate-list">
 							<view class="item" :class="{ active: item.id === cat1Id }" v-for="item in allCateList"
-								@click="handleMenuItem('cat1Id', item)" :key="item.id">{{ item.title }}</view>
+								@click="handleMenuItem('cat1Id', item)" :key="item.id">{{ item.name }}</view>
 						</view>
 					</scroll-view>
 					<view class="menu" v-if="sortOpen">
@@ -87,25 +93,32 @@
 
 		<view class="product-body">
 			<view class="empty" v-if="isListEmpty">
-				<image class="empty-image" mode="widthFix" src="/static/img_empty.png"></image>
-				<view class="empty-text">暂无商家</view>
+				<u-empty text="暂无商家" mode="coupon"></u-empty>
+<!--				<image class="empty-image" mode="widthFix" src="/static/img_empty.png"></image>-->
+<!--				<view class="empty-text">暂无商家</view>-->
 			</view>
 			<block v-else>
 				<productList ref="productList" :list="shopList" baseUrl="/pages/life/shop/shop"></productList>
 			</block>
 		</view>
 
-		<u-popup v-model="showPopup" id="popup" ref="popup" mode="bottom" animation="true">
-			<view class="popup-content" @click="closePopup">
-				<view class="action-sheet-item b-b" @click="initLocation">定位当前位置</view>
-				<picker mode="multiSelector" :range="areaList" @columnchange="handleCityColumnChange"
-					@change="handleCityChange">
-					<view class="action-sheet-item">选择所在城市</view>
-				</picker>
-				<view class="action-sheet-item-cancel-item">取消</view>
-			</view>
-		</u-popup>
+		<u-action-sheet :list="actionList" v-model="showAction" :cancel-btn="false" @click="actionClick"></u-action-sheet>
 
+		<dx-mt-address ref="dxArea" v-model="showAreaSelect" title="选择区域" @cancel="areaCancel()"
+				 @confirm="areaConfirm" ></dx-mt-address>
+
+		<dx-uselect :list="province" v-model="showCitySelect" @columnChange="columnChange"></dx-uselect>
+<!--		<u-popup v-model="showPopup" id="popup" ref="popup" mode="bottom" animation="true">-->
+<!--			<view class="popup-content" @click="closePopup">-->
+<!--				<view class="action-sheet-item b-b" @click="initLocation">定位当前位置</view>-->
+<!--				<picker mode="multiSelector" :range="areaList" @columnchange="handleCityColumnChange"-->
+<!--					@change="handleCityChange">-->
+<!--					<view class="action-sheet-item">选择所在城市</view>-->
+<!--				</picker>-->
+<!--				<view class="action-sheet-item-cancel-item">取消</view>-->
+<!--			</view>-->
+<!--		</u-popup>-->
+		<dx-tabbar v-model="tabBarIndex"></dx-tabbar>
 	</view>
 </template>
 <script>
@@ -115,14 +128,21 @@
 	import utils from '@/common/utils.js'
 	import api from '@/common/api-util.js'
 	import productList from '@/components/product-list/product-list.vue'
+	import UIcon from "../../../uview-ui/components/u-icon/u-icon";
+	import DxUselect from "../../../components/dx-uselect/dx-uselect";
+	import DxMtAddress from "../../../components/dx-mt-address/dx-mt-address";
 
 
 	export default {
 		components: {
+			DxMtAddress,
+			DxUselect,
+			UIcon,
 			productList
 		},
 		data() {
 			return {
+				tabBarIndex: 3,
 				list: [],
 				areaList: [], // 处理后城市列表展示数据
 				index: 0,
@@ -168,6 +188,30 @@
 						id: 11,
 						title: "优惠比例降序",
 					},
+					{
+						id: 14,
+						title: "门店评分升序",
+					},
+					{
+						id: 15,
+						title: "门店评分降序",
+					},
+					{
+						id: 18,
+						title: "门店人均价格升序",
+					},
+					{
+						id: 19,
+						title: "门店人均价格降序",
+					},
+					{
+						id: 20,
+						title: "门店季度销量升序",
+					},
+					{
+						id: 21,
+						title: "门店季度销量降序",
+					},
 				],
 				aroundList: [{
 						id: 500,
@@ -191,6 +235,7 @@
 					},
 				],
 				allCateList: [],
+				showMenuMask: false,
 				aroundOpen: false,
 				aroundTitle: "附近",
 				radii: "", // 距离
@@ -207,7 +252,14 @@
 				page: 1,
 				keywords: "",
 				navHeight: 60,
-				showPopup: false,
+				showAction: false,
+				actionList: [
+					{
+						text: '定位当前位置',
+					}, {
+						text: '选择所在城市'
+					}
+				],
 				priceRange: [{
 						lower: 0,
 						upper: 5000,
@@ -247,68 +299,76 @@
 					},
 				],
 				isListEmpty: false,
+				province:[],
+				showCitySelect: false,
+				showAreaSelect: false,
 			};
 		},
 
 		computed: {
 
 		},
+		onPullDownRefresh() {
+			log.debug("onPullDownRefresh")
+			this.updateCategoryList();
+			uni.stopPullDownRefresh();
+		},
 
 		onLoad(e) {
-			// this.getNavHeight();
-			this.initLocation();
-			this.getCityList();
+			this.init();
+			this.getShopList();
 		},
 		methods: {
-			async initLocation() {
+			async init() {
+
+				let that = this;
+				this.cat0Id  = 0;
 				//#ifndef H5
 				const authorize = await utils.getLocationAuth();
-				if (!authorize) return;
-				const [locationErr, locationRes] = await uni.getLocation();
-				const {
-					latitude,
-					longitude
-				} = locationRes;
+				// if (!authorize) return;
+				uni.getLocation({
+						type: 'wgs84', //gcj02 wgs84
+						geocode: true,//设置该参数为true可直接获取经纬度及城市信息
+						success: function (res) {
+							log.debug(res);
+							that.lat = res.latitude;
+							that.lng = res.longitude;
+							api.mt.ip2city(that.lng, that.lat).then(res => {
+								if (res.code == api.SUCCESS) {
+									that.city = res.data.city;
+									that.cityId = res.data.cityId;
+									that.updateCategoryList();
+								}
+							})
+						},
+					}
+				);
 				//#endif
 
-
-				// const [cityErr, cityRes] = await getCity({
-				//   lat: latitude,
-				//   lng: longitude,
-				// });
-				// const { city, id } = cityRes?.data?.data || {};
-				this.city = "厦门";
-				this.cityId = "62";
-
-				this.lat = 24.57591;
-				this.lng = 118.09728;
-
-
-
-				// 一级tab也通过后端接口返回
-				// api.mt.cityCategories(this.cityId).then(res => {
-				//   if (res.code == api.SUCCESS) {
-				//     this.tabList = res.data.categories;
-				//     if (this.tabList.length > 0) {
-				//       this.cat0Id = this.tabList[0];
-				//     }
-				//
-				//   }
-				// })
-				// await this.fetchTabList();
-
-				// this.cat0Id = this.tabList[0].id;
-				await this.updateCategoryList();
-				this.getShopList();
+				this.city = "全国";
+				this.cityId = "0";
+				// this.lat = 24.57591;
+				// this.lng = 118.09728;
+				let res = await api.mt.ip2city(this.lng, this.lat);
+				log.debug(res);
+				if (res.code == api.SUCCESS) {
+					this.city = res.data.city;
+					this.cityId = res.data.cityId;
+				}
+				this.updateCategoryList();
+				this.getCitySubCategories();
 			},
 
-			/**
-			 * 请求原始城市数据
-			 */
-			async getCityList() {
-				// const [err, res] = await getArea();
-				// this.originAreaList = res?.data?.data || [];
-				// this.updateAreaList();
+			actionClick(index) {
+				if (index == 0) {
+					this.init();
+				} else if(index == 1) {
+					this.showAreaSelect = true;
+				}
+			},
+
+			columnChange(e){
+
 			},
 
 			/**
@@ -361,20 +421,32 @@
 				api.mt.dealsSearch(data).then(res => {
 					utils.hideLoading();
 					if (res.code == api.SUCCESS) {
+						if (res.data.page == 1 && res.data.recordCount == 0) {
+							this.isListEmpty = true;
+							return;
+						}
 						this.page = this.page + 1;
 						this.shopList = concat ? this.shopList.concat(res.data.records) : res.data.records;
 					} else {
-						if (data.page == 1) {
+						if (res.data.page == 1) {
 							this.isListEmpty = true;
 						}
 					}
 				})
-				// const [err, res] = await getShopList(data);
-				// const shopList = res?.data?.data?.records || [];
-				// this.shopList = concat ? this.shopList.concat(shopList) : shopList;
-				// // 没有商家数据
-				// this.isListEmpty = !concat && !shopList.length;
-				// uni.hideLoading();
+			},
+
+			areaCancel(){
+				log.debug("areaCancel");
+			},
+			areaConfirm(e){
+				log.debug("areaConfirm", e);
+				let cityInfo = e[e.length -1];
+				this.cityId = cityInfo.value;
+				this.city = cityInfo.label;
+				this.lat = null;
+				this.lng = null;
+				this.updateCategoryList();
+
 			},
 
 			/**
@@ -392,6 +464,7 @@
 				this.radii = ""; // 距离
 				this.allTitle = "全部分类";
 				this.cat1Id = ""; // 二级类目id
+				// this.cat0Id = "";
 				this.sortTitle = "离我最近";
 				this.sortType = 1; // 排序类型
 				this.page = 1;
@@ -419,16 +492,21 @@
 				if (tab.id == this.cat0Id) return;
 				this.cat0Id = tab.id;
 				this.closeMenu();
-				api.mt.cityCategories(this.cityId, this.cat0Id).then(res => {
-					if (res.code == api.SUCCESS) {
 
-					}
-				})
-
-				// this.updateCategoryList();
+				this.getCitySubCategories();
 				this.getShopList();
 			},
-
+			getCitySubCategories(){
+				this.allCateList = [];
+				api.mt.cityCategories(this.cityId, this.cat0Id).then(res => {
+					if (res.code == api.SUCCESS) {
+						for (let i=0; i<res.data.length; i++) {
+							let cat = res.data[i];
+							this.allCateList.push(cat)
+						}
+					}
+				})
+			},
 			handleMenuItem(type, item) {
 				const {
 					id,
@@ -490,9 +568,12 @@
 					this.closeMenu();
 					this[type] = true;
 				}
+				this.showMenuMask = true;
+
 			},
 
 			closeMenu() {
+				this.showMenuMask = false;
 				this.aroundOpen = false;
 				this.allOpen = false;
 				this.sortOpen = false;
@@ -502,37 +583,18 @@
 			async updateCategoryList() {
 				this.resetMenu(); // 重置二级tab选择
 				this.tabList = [];
-				api.mt.cityCategories(this.cityId).then(res => {
-					if (res.code == api.SUCCESS) {
-						let catetories = res.data.categories;
-						if (catetories){
-                          for (let [key, value] of Object.entries(catetories)) {
-                            console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]
-                            let o = {};
-                            o.id = key;
-                            o.name = value;
-                            this.tabList.push(o)
-                          }
-                        }
-
-						if (this.tabList.length > 0) {
-							if (!this.cat0Id) {
-								this.cat0Id = this.tabList[0].id;
-							}
-							this.getShopList();
-						}
+				let res = await  api.mt.cityCategories(this.cityId);
+				if (res.code == api.SUCCESS) {
+					for (let i=0; i<res.data.length; i++) {
+						let cat = res.data[i];
+						this.tabList.push(cat)
 					}
-				})
-				// const [err, res] = await getCategory({
-				//   cityId: this.cityId,
-				//   cat0Id: this.cat0Id,
-				// });
-				// const categories = res.data.data.categories;
-				// const allCateList = Object.keys(categories).map((id) => ({
-				//   id,
-				//   title: categories[id],
-				// }));
-				// this.allCateList = [{ id: "", title: "全部分类" }, ...allCateList];
+				}
+				if (this.tabList.length > 0) {
+					this.cat0Id = this.tabList[0].id;
+					this.getShopList();
+				}
+
 			},
 
 			/**
@@ -565,27 +627,16 @@
 				this.keywords = e.detail.value;
 			},
 
-
 			search() {
 				this.page = 1;
 				this.getShopList();
 			},
 
 			openPopup() {
-				this.showPopup = true;
+				this.showAction = true;
 			},
 			closePopup() {
-				this.showPopup = false;
-			},
-			getNavHeight() {
-				const query = uni.createSelectorQuery();
-				query
-					.select(".top")
-					.boundingClientRect((rect) => {
-						const height = rect.height;
-						this.navHeight = height;
-					})
-					.exec();
+				this.showAction = false;
 			},
 			onShareAppMessage(res) {
 				// return getShareMessage()
@@ -599,6 +650,7 @@
 </script>
 <style lang="scss">
 	.nav-bar {
+		padding-top: 50rpx;
 		background-color: #FFF;
 
 		&.choose-address {
@@ -613,83 +665,6 @@
 		}
 	}
 
-	.sort-bar {
-		display: flex;
-		justify-content: space-around;
-		height: 76rpx;
-		padding: 4rpx 0 4rpx;
-		background-color: #fff;
-		position: relative;
-		z-index: 1;
-
-		.item {
-			flex: 1;
-			height: 100%;
-			font-size: 32rpx;
-			font-weight: 600;
-			color: #333;
-			position: relative;
-			overflow: hidden;
-
-			&.active {
-				color: #ff536f;
-				font-weight: 700;
-
-				&:after {
-					position: absolute;
-					left: 50%;
-					bottom: 0;
-					transform: translateX(-28rpx);
-					content: "";
-					width: 56rpx;
-					height: 4rpx;
-					background-color: #ff536f;
-					border-radius: 10px;
-				}
-
-				.mix-icon.active {
-					color: #ff536f;
-				}
-			}
-
-			/* #ifdef MP */
-			&.last:before {
-				content: "";
-				position: absolute;
-				right: 0;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 2rpx;
-				height: 40rpx;
-				box-shadow: 0 0 16rpx rgba(0, 0, 0, 0.6);
-			}
-
-			/* #endif */
-		}
-
-		.icon-wrap {
-			display: flex;
-			flex-direction: column;
-			padding-left: 8rpx;
-		}
-
-		.mix-icon {
-			font-size: 14rpx;
-			color: #bbb;
-		}
-
-		.btn {
-			height: 68rpx;
-			padding-left: 16rpx;
-			padding-right: 20rpx;
-
-			.icon-hengxiangliebiao,
-			.icon-shuxiangliebiao {
-				font-size: 40rpx;
-				color: #333;
-			}
-		}
-	}
 
 	.sticky-box {
 		/*position: sticky;*/
@@ -742,6 +717,7 @@
 	}
 
 	.dropdown {
+		z-index: 1000;
 		.item {
 			margin: 0 28rpx;
 			padding: 32rpx 0;
@@ -816,7 +792,7 @@
 	}
 
 	.product-body {
-		padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+		padding-bottom: calc(160rpx);
 	}
 
 	.popup-content {
@@ -838,7 +814,7 @@
 			align-items: center;
 			justify-content: center;
 			padding: 24rpx;
-			padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+			padding-bottom: calc(24rpx );
 			background: #fff;
 			margin-top: 16rpx;
 			color: #164ab0;

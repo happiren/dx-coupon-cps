@@ -45,7 +45,12 @@
                                 <view class="user-name" v-if="userInfo.nickname" @click="onAvatarClick()">
                                     {{userInfo.nickname}}
                                 </view>
-                                <view>公众号：爱享外卖优惠券</view>
+                                <view class="mp">
+                                    <view>公众号：爱享外卖优惠券</view>
+                                    <view>
+                                        <u-icon @click="copy('爱享外卖优惠券')" style="margin-left: 12rpx" name="/static/icon/copy.png" size="24"></u-icon>
+                                    </view>
+                                </view>
                                 <view class="user-desc-home">
 <!--                                    <view class="user-desc" @click="onAvatarClick()">{{userInfo.description || "&nbsp;"}}-->
 <!--                                    </view>-->
@@ -129,6 +134,7 @@
 
             <view class="develop-env" @click="scanCodeTest()">扫码测试</view>
         </view>
+        <dx-tabbar v-model="tabBarIndex"></dx-tabbar>
     </view>
 </template>
 
@@ -150,6 +156,7 @@
     export default {
         data() {
             return {
+                tabBarIndex: 4,
                 showGetPhone: false,
                 showLoginFlag: false,
                 canIUseGetUserProfile: false,
@@ -333,6 +340,9 @@
             goLogin(){
                 log.debug("goLogin")
                 utils.navigateTo("/pages/user/login/login");
+            },
+            copy(val) {
+                utils.setClipboardData(val);
             },
             goPoster(){
                 if (!auth.checkLogin()){
@@ -549,6 +559,14 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+    }
+
+    .mp{
+        display: flex;
+        align-items: flex-start;
+        align-content: flex-start;
+        justify-content: flex-start;
+        justify-items: flex-start;
     }
 
     .user-menu{

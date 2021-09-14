@@ -10,6 +10,16 @@ export default {
      * 获取文章分类
      * @returns {*}
      */
+    miniAppId(){
+        return http.get("/api/mt/miniAppId", {
+        })
+    },
+    ip2city(lng, lat){
+        return http.get("/api/mt/ip2city", {
+            lng:lng,
+            lat:lat
+        })
+    },
     getProvince(){
         return http.get("/api/mt/province", {
         })
