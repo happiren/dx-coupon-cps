@@ -10,7 +10,7 @@
         <image :src="item.dealBaseInfo.defaultPic" mode="aspectFill"></image>
       </view>
       <view class="right column b-b">
-        <text class="title clamp">{{ item.shopInfo.shopName }}</text>
+        <text class="title clamp">{{ baseUrl? item.shopInfo.shopName : item.dealBaseInfo.dealTitle }}</text>
         <view class="desc">
           <view class="score">
             <u-rate :count="5" :current="item.shopInfo.shopPower / 10" :disabled="true"></u-rate>
@@ -33,8 +33,8 @@
         </view>
         <view class="coupons">
           <view class="coupon">
-            <view class="icon">惠</view>
-            <text>{{ item.dealBaseInfo.dealTitle }}</text>
+            <view  class="icon">惠</view>
+            <text>{{ baseUrl ?  item.dealBaseInfo.dealTitle : item.shopInfo.shopName }}</text>
           </view>
         </view>
         <view class="coupons-more">

@@ -11,7 +11,7 @@ export default {
      * @returns {*}
      */
     getArticleCats(){
-        return http.get("/api/v2/common/article/category", {
+        return http.get("/api/common/article/category", {
         })
     },
 

@@ -15,8 +15,11 @@
           </view>
           <view class="address">{{ shopInfo.address }}</view>
           <view class="sale">
-            <uni-icons type="flag-filled" size="16" color="#e62828"></uni-icons>
-            <text class="icon-font iconfont-fire"></text>
+            <!-- <uni-icons type="flag-filled" size="16" color="#e62828"></uni-icons> -->
+			<u-icon v-if="shopInfo.gradeIcon" :name="shopInfo.gradeIcon" style="margin-right: 8rpx;" size=28></u-icon>
+			<u-tag v-if="shopInfo.isMustEat" text="必吃榜" size="mini" mode="light" style="margin-right: 8rpx;" shape="circle" color="#FF536F" bg-color="#F4F4F4" border-color="#F4F4F4"/>
+		
+            <!-- <text class="icon-font iconfont-fire"></text> -->
   <!--          <view class="info">人均消费 {{  Math.floor(item.shopInfo.pricePerson / 100) }} 元</view>-->
             <text v-if="shopInfo.pricePerson > 0" class="count">人均消费 {{ Math.floor(shopInfo.pricePerson / 100)}}</text>
           </view>
@@ -226,7 +229,7 @@ page {
         margin-top: 20rpx;
 
         .icon-font {
-          color: #fd5401;
+          color: #333333;
           font-size: 36rpx;
           height: 36rpx;
           justify-content: center;
@@ -235,7 +238,7 @@ page {
 
         .count {
           font-size: 26rpx;
-          color: #333;
+          color: #606266;
           font-weight: 600;
           height: 26rpx;
           line-height: 26rpx;
