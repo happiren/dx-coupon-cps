@@ -531,11 +531,11 @@ function navigateToMiniProgram(appId, path) {
         },
         fail:function (res) {
             console.debug("navigateToMiniProgram fail", res)
-            uni.showToast({
-                title:"跳转小程序失败",
-                duration:2000,
-                icon:"none"
-            });
+            // uni.showToast({
+            //     title:"跳转小程序失败",
+            //     duration:2000,
+            //     icon:"none"
+            // });
 
         }
     })

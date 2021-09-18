@@ -105,6 +105,11 @@
 				this.current = parseInt(this.$store.getters.tabParam);
 				this.$store.commit('tabParam', "");
 			}
+			// let tabParam = uni.getStorageSync("tabParam");
+			// if (tabParam) {
+			// 	this.current = parseInt(tabParam);
+			// 	uni.setStorageSync("tabParam", "");
+			// }
 		},
 		onLoad(options) {
 			this.loading = false;
@@ -113,7 +118,7 @@
 					this.loading = true;
 					this.activities = res.data;
 					// this.current = 0;
-					this.change(0);
+					this.change(this.current);
 				}
 			})
 		},

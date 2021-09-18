@@ -24,12 +24,14 @@ function clickNavigate(action, actionParam, extra = null) {
         }
         return;
     } else if (action == 2) { //打开应用内页面
-        if (actionParam && (actionParam.startsWith("/pages/index/index") || actionParam.startsWith("/pages/meituan/meituan") || actionParam.startsWith("/pages/ele/ele") || actionParam.startsWith("/pages/user/mine/mine"))) {
+        if (actionParam && (actionParam.startsWith("/pages/index/index") || actionParam.startsWith("/pages/meituan/meituan") || actionParam.startsWith("/pages/ele/ele") || actionParam.startsWith("/pages/life/arrive/arrive") || actionParam.startsWith("/pages/user/mine/mine"))) {
             let index = utils.getQueryValue(actionParam, "index");
             if (index) {
                 console.log("store", store);
+                // uni.setStorageSync("tabParam", index);
                 store.commit('tabParam', index);
             } else {
+                // uni.setStorageSync("tabParam", "");
                 store.commit('tabParam', "");
             }
             utils.switchTab(actionParam);

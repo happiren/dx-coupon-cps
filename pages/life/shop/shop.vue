@@ -14,6 +14,7 @@
             <view class="cate-name">{{ shopInfo.cateName }}</view>
           </view>
           <view class="address">{{ shopInfo.address }}</view>
+          <view class="time">营业时间：{{ shopInfo.bizHourDesc }}</view>
           <view class="sale">
             <!-- <uni-icons type="flag-filled" size="16" color="#e62828"></uni-icons> -->
 			<u-icon v-if="shopInfo.gradeIcon" :name="shopInfo.gradeIcon" style="margin-right: 8rpx;" size=28></u-icon>
@@ -218,6 +219,11 @@ page {
         font-size: 26rpx;
         color: #666;
       }
+	  .time {
+	    margin-top: 8rpx;
+	    font-size: 24rpx;
+	    color: #909399;
+	  }
 
       .sale,
       .sale .icon-font {
@@ -226,7 +232,7 @@ page {
       }
 
       .sale {
-        margin-top: 20rpx;
+        margin-top: 12rpx;
 
         .icon-font {
           color: #333333;
@@ -239,7 +245,7 @@ page {
         .count {
           font-size: 26rpx;
           color: #606266;
-          font-weight: 600;
+          font-weight: 400;
           height: 26rpx;
           line-height: 26rpx;
         }

@@ -27,7 +27,7 @@
       :width="system.w"
       :height="system.h"
     ></canvas>
-    <view class="button-wrapper">
+    <view v-if="showBtn" class="button-wrapper" >
       <!-- 保存海报按钮 -->
       <!-- #ifndef MP-QQ -->
       <!-- cover-view 标签qq小程序有问题 -->
@@ -48,7 +48,8 @@
     data() {
       return {
         system: {},
-        canvasShow: false
+        canvasShow: false,
+        showBtn: false,
       }
     },
     props: {
@@ -176,6 +177,7 @@
         if (!this.poster) {
           return null;
         }
+        this.showBtn = false;
         uni.showLoading({
           title: '生成海报中...'
         })
@@ -241,6 +243,8 @@
           )
         })
         uni.hideLoading()
+        this.showBtn = true;
+
       },
       /**
        * @description: 保存到系统相册
@@ -408,7 +412,7 @@
 
     .button-wrapper {
       position: fixed;
-      bottom: 20rpx;
+      bottom: 120rpx;
       z-index: 16;
       display: flex;
       width: 100%;

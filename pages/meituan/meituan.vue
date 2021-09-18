@@ -93,11 +93,16 @@
 			}
 		},
 		onShow(e) {
-
 			if (this.$store.getters.tabParam) {
 				this.current = parseInt(this.$store.getters.tabParam);
 				this.$store.commit('tabParam', "");
 			}
+
+			// let tabParam = uni.getStorageSync("tabParam");
+			// if (tabParam) {
+			// 	this.current = parseInt(tabParam);
+			// 	uni.setStorageSync("tabParam", "");
+			// }
 		},
 		onLoad(options) {
 			this.loading = false;

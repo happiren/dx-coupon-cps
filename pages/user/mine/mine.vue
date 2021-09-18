@@ -102,7 +102,7 @@
 <!--            <u-cell-item icon="/static/images/icon-default-avatar.png" title="设置" :border-bottom="false"></u-cell-item>-->
         </u-cell-group>
 
-        <dx-poster ref="dxPoster" @cancel="posterHandleCancel" :posterData.sync="posterData"  />
+        <dx-poster v-if="showPoser" ref="dxPoster" @cancel="posterHandleCancel" :posterData.sync="posterData"  />
 
         <view v-if="login" style="text-align: center;margin-top:48rpx">
             <u-button size="medium" shape="circle" plain @click="onLogout">退出登录</u-button>
@@ -188,6 +188,7 @@
                     lineHeight: "1.5",
                     marginLeft: "10rpx"
                 },
+                showPoser: false,
                 posterData: null,
             }
         },
@@ -322,16 +323,18 @@
             },
             checkUnionidLogin(){
                 let that = this;
+				utils.showLoading("加载中...");
                 uni.login({
                     provider: "weixin",
                     success: (res => {
                         auth.codeLogin(res.code, function () {
+							utils.hideLoading();
                             that.userInfo = auth.getLocalUserInfo();
                             that.login = true;
                         })
                     }),
                     fail: (res) => {
-                        // utils.hideLoading("加载中...");
+                         utils.hideLoading();
                         // utils.toast("微信登录失败");
                     }
                 });
@@ -345,6 +348,7 @@
                 utils.setClipboardData(val);
             },
             goPoster(){
+
                 if (!auth.checkLogin()){
                     utils.toast("请先登录");
                     return;
@@ -352,8 +356,8 @@
                 let that = this;
                 api.user.usePosterTemplate().then(res =>  {
                     if (res.code == api.SUCCESS) {
-
                         this.posterData = JSON.parse(res.data.template);
+                        this.showPoser = true;
                         setTimeout(function () {
                             that.$refs.dxPoster.posterShow();
                         }, 200)
