@@ -104,7 +104,8 @@
 			// 	uni.setStorageSync("tabParam", "");
 			// }
 		},
-		onLoad(options) {
+		async onLoad(options) {
+			await this.$onLaunched;
 			this.loading = false;
 
 

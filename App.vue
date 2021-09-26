@@ -16,10 +16,6 @@
 
              this.userInit();
 
-
-
-
-
              //#ifdef APP-PLUS
              this.checkArguments();
              plus.globalEvent.addEventListener('newintent', (e)=>{
@@ -44,9 +40,40 @@
 		},
         methods:{
             async userInit() {
-                await auth.setStoreToken();
-                auth.getUserInfo();
-                api.user.addEntryLog(0);
+                let login = await auth.checkTokenLogin();
+                if (!login) {
+                    this.checkUnionidLogin();
+                } else {
+                    this.$isResolve(); //标记登录成功
+                    api.user.addEntryLog(0);
+                }
+
+            },
+            checkUnionidLogin(){
+                let that = this;
+                utils.showLoading("加载中...");
+                uni.login({
+                    provider: "weixin",
+                    success: (res => {
+                        auth.codeLogin(res.code, function () {
+                            utils.hideLoading();
+                            that.userInfo = auth.getLocalUserInfo();
+                            that.login = true;
+                            that.$isResolve(); //标记登录成功
+                            api.user.addEntryLog(0);
+                        })
+                        //500毫秒后标记完成
+                        setTimeout(function() {
+                                that.$isResolve(); //标记登录成功
+                            },500
+                        );
+                    }),
+                    fail: (res) => {
+                        utils.hideLoading();
+                        that.$isResolve(); //标记登录成功
+                        // utils.toast("微信登录失败");
+                    }
+                });
             },
             checkArguments(){
                 console.error("checkArgument");

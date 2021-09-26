@@ -111,7 +111,8 @@
 			// 	uni.setStorageSync("tabParam", "");
 			// }
 		},
-		onLoad(options) {
+		async onLoad(options) {
+			await this.$onLaunched;
 			this.loading = false;
 			api.coupon.eleCoupon().then(res => {
 				if (res.code = api.SUCCESS) {

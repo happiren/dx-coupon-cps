@@ -60,4 +60,9 @@ const app = new Vue({
 })
 app.$mount()
 
+//用户修改用户同步登录
+Vue.prototype.$onLaunched = new Promise(resolve => {
+	Vue.prototype.$isResolve = resolve
+})
+
 

@@ -123,6 +123,14 @@
 							"activeColor": "#2979ff"
 						},
 						{
+							"pagePath": "/pages/life/arrive/arrive",
+							"text": "吃喝玩乐",
+							"onReachBottomDistance": 300,
+							"iconPath": "/static/tab/life.png",
+							"selectedIconPath": "/static/tab/life-selected.png",
+							"activeColor": "#EC4040"
+						},
+						{
 							"pagePath": "/pages/meituan/meituan",
 							"text": "美团",
 							"onReachBottomDistance": 300,
@@ -130,15 +138,6 @@
 							"selectedIconPath": "/static/tab/meituan-selected.png",
 							"activeColor": "#FFC300"
 						},
-						{
-							"pagePath": "/pages/life/arrive/arrive",
-							"text": "生活",
-							"onReachBottomDistance": 300,
-							"iconPath": "/static/tab/life.png",
-							"selectedIconPath": "/static/tab/life-selected.png",
-							"activeColor": "#EC4040"
-						},
-
 						{
 							"pagePath": "/pages/user/mine/mine",
 							"text": "我的",

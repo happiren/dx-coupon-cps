@@ -187,7 +187,8 @@
         onReachBottom() {
             // this.getArticle();
         },
-        onLoad() {
+        async onLoad() {
+            await this.$onLaunched;
             // uni.hideTabBar();
             let that = this;
             var word = "hello";

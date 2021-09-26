@@ -59,12 +59,27 @@ function getUserInfo() {
 
 }
 
+
+async function  checkTokenLogin() {
+	var token =  uni.getStorageSync("token");
+	store.commit('token', token);
+
+	let res = await api.user.userDetailInfo();
+	if (res.code == ErrorCode.SUCCESS) {
+		store.commit('userInfo', res.data);
+		return true;
+	} else {
+		return false;
+	}
+}
+
 /**
  * 从磁盘中获取token
  */
 function setStoreToken() {
 	var token =  uni.getStorageSync("token");
 	store.commit('token', token);
+	return token;
 }
 
 
@@ -126,6 +141,8 @@ function codeLogin(code, callback) {
 					url:"/pages/user/mine/mine"
 				});
 			}
+		} else {
+
 		}
 	});
 }
@@ -164,6 +181,7 @@ function loginOut() {
 
 module.exports = {
 	checkLogin: checkLogin,
+	checkTokenLogin: checkTokenLogin,
 	codeLogin: codeLogin,
 	debugLoin: debugLoin,
 	setStoreToken:setStoreToken,

@@ -314,7 +314,8 @@
 			uni.stopPullDownRefresh();
 		},
 
-		onLoad(e) {
+		async onLoad(e) {
+			await this.$onLaunched;
 			this.init();
 			this.getShopList();
 		},
