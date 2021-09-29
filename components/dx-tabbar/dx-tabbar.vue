@@ -76,7 +76,7 @@
 			// 非凸起图标的大小，单位任意，数值默认rpx
 			iconSize: {
 				type: [String, Number],
-				default: 40
+				default: 48
 			},
 			// 凸起的图标的大小，单位任意，数值默认rpx
 			midButtonSize: {
@@ -328,7 +328,7 @@
 				flex: 1;
 				justify-content: center;
 				height: 100%;
-				padding: 12rpx 0;
+				/*padding: 12rpx 0;*/
 				@include vue-flex;
 				flex-direction: column;
 				align-items: center;
@@ -336,7 +336,7 @@
 
 				&__button {
 					position: absolute;
-					top: 14rpx;
+					top: 12rpx;
 					left: 50%;
 					transform: translateX(-50%);
 				}
@@ -346,7 +346,9 @@
 					font-size: 26rpx;
 					line-height: 28rpx;
 					position: absolute;
-					bottom: 14rpx;
+					top: 60rpx;
+					bottom:auto;
+					/*bottom: 14rpx;*/
 					left: 50%;
 					transform: translateX(-50%);
 					width: 100%;
