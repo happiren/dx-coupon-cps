@@ -42,8 +42,8 @@
 <!--            券后 {{  Math.floor(item.dealBaseInfo.finalPrice / 100) }} 元-->
 <!--          </view>-->
           <view class="prices">
-            <text class="final">¥{{ parseFloat(item.dealBaseInfo.finalPrice / 100).toFixed(1) }}</text>
-            <text class="market">¥{{  parseFloat(item.dealBaseInfo.marketPrice / 100).toFixed(1) }}</text>
+            <text class="final">¥{{ Number(parseFloat(item.dealBaseInfo.finalPrice / 100).toFixed(1)) }}</text>
+            <text class="market">¥{{  Number(parseFloat(item.dealBaseInfo.marketPrice / 100).toFixed(1)) }}</text>
           </view>
           <view class="coupon-btn"
             >领券省{{ Math.floor((item.dealBaseInfo.marketPrice - item.dealBaseInfo.finalPrice) / 100) }}元</view
