@@ -38,7 +38,13 @@
           </view>
         </view>
         <view class="coupons-more">
-          <view class="info">券后 {{  Math.floor(item.dealBaseInfo.finalPrice / 100) }} 元</view>
+<!--          <view class="info">-->
+<!--            券后 {{  Math.floor(item.dealBaseInfo.finalPrice / 100) }} 元-->
+<!--          </view>-->
+          <view class="prices">
+            <text class="final">¥{{ parseFloat(item.dealBaseInfo.finalPrice / 100).toFixed(1) }}</text>
+            <text class="market">¥{{  parseFloat(item.dealBaseInfo.marketPrice / 100).toFixed(1) }}</text>
+          </view>
           <view class="coupon-btn"
             >领券省{{ Math.floor((item.dealBaseInfo.marketPrice - item.dealBaseInfo.finalPrice) / 100) }}元</view
           >
@@ -236,6 +242,28 @@ export default {
     justify-content: space-between;
     align-items: flex-end;
 
+    .prices {
+      display: inline-block;
+      margin-right: 16rpx;
+      /*background: #fee;*/
+      /*color: #e62828;*/
+      padding: 6rpx 14rpx;
+      border-radius: 26rpx;
+      font-size: 24rpx;
+      /*height: 34rpx;*/
+      .final{
+        color: #e62828;
+        font-size: 32rpx;
+      }
+      .market{
+        margin-left: 16rpx;
+        color: #999999;
+        font-size: 26rpx;
+        text-decoration:line-through;
+      }
+
+    }
+
     .info {
       display: inline-block;
       margin-right: 16rpx;
@@ -250,9 +278,9 @@ export default {
     .coupon-btn {
       background: #ff536f;
       color: #fff;
-      padding: 6rpx 26rpx;
+      padding: 8rpx 24rpx;
       border-radius: 26rpx;
-      font-size: 30rpx;
+      font-size: 28rpx;
     }
   }
 }
