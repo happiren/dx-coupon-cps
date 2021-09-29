@@ -17,7 +17,8 @@
                 <swiper-item v-for="(list, listIndex) in navList"  :key="listIndex">
                         <u-grid :col="5" :border="false">
                             <u-grid-item class="nav" v-for="(item, index) in list" :custom-style="{padding: '40rpx 0 0 0'}" @click="navClick(item)" :key="index">
-                                <u-icon class="icon" :name="item.image"  :size="80"></u-icon>
+<!--                                <u-icon class="icon" :name="item.image"  :custom-style="borderRound" :size="80"></u-icon>-->
+                                <image class="icon"  :src="item.image" mode="widthFix" ></image>
                                 <view class="text" >{{item.title}}</view>
                             </u-grid-item>
                         </u-grid>
@@ -26,7 +27,8 @@
             <view class="swiper"  v-else="navList.length > 1">
                 <u-grid :col="5" :border="false">
                     <u-grid-item class="nav" v-for="(item, index) in navList[0]" :custom-style="{padding: '40rpx 0 0 0'}" @click="navClick(item)">
-                        <u-icon class="icon" :name="item.image" :size="80"></u-icon>
+<!--                        <u-icon class="icon" :name="item.image" :custom-style="borderRound" :size="80"></u-icon>-->
+                        <image class="icon"  :src="item.image" mode="widthFix" ></image>
                         <view class="text">{{item.title}}</view>
                     </u-grid-item>
                 </u-grid>
@@ -100,7 +102,7 @@
                                         <u-icon name="eye" size="30"></u-icon>
                                         <text style="margin-left: 8rpx; line-height: 37rpx">{{item.view_num}}</text>
                                     </view>
-                                    <view class="line">
+                                    <view class="line" v-if="false">
                                         <u-icon name="heart" size="30"></u-icon>
                                         <text style="margin-left: 8rpx; line-height: 37rpx">{{item.collect_num}}</text>
                                     </view>
@@ -131,7 +133,7 @@
                                 <u-icon name="eye" size="30"></u-icon>
                                 <text style="margin-left: 8rpx; line-height: 37rpx">{{item.view_num}}</text>
                             </view>
-                            <view class="line">
+                            <view class="line" v-if="false">
                                 <u-icon name="heart" size="30"></u-icon>
                                 <text style="margin-left: 8rpx; line-height: 37rpx">{{item.collect_num}}</text>
                             </view>
@@ -174,6 +176,10 @@
                 articleList: [],
                 couponCards:[],
                 noMoreFlag: false,
+                borderRound: {
+                    "borderRadius": "50%",
+                    "borderRadius": "40rpx",
+                }
             }
         },
         onPullDownRefresh() {
@@ -396,6 +402,7 @@
         .nav{
             .icon {
                 border-radius: 50%;
+                border-radius: 40rpx;
                 width: 80rpx;
                 height: 80rpx;
             }

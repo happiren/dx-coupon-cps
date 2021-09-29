@@ -47,10 +47,13 @@
                     this.$isResolve(); //标记登录成功
                     api.user.addEntryLog(0);
                 }
-
+                //#ifdef H5
+                this.$isResolve(); //标记登录成功
+                //#endif
             },
             checkUnionidLogin(){
                 let that = this;
+                //#ifdef MP-WEIXIN
                 utils.showLoading("加载中...");
                 uni.login({
                     provider: "weixin",
@@ -74,6 +77,7 @@
                         // utils.toast("微信登录失败");
                     }
                 });
+                //#endif
             },
             checkArguments(){
                 console.error("checkArgument");
