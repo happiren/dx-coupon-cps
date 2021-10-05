@@ -26,9 +26,9 @@ https://www.codenong.com/jsa77a3f5f0277/
 
 
 ### 已上线案例：
-
 <img src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/aixiang-wechat.jpg" width="200"/>
 
+### 联系方式
 
-
+<img src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/hap-wechat.jpg" width="200"/>
 
