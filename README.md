@@ -20,9 +20,8 @@
 
 直接使用Hbuilder编译成小程序的
 
-#### 3.webstorm格式化代码后出现rpx中间存在空格的问题通过以下方法解决
-https://www.codenong.com/jsa77a3f5f0277/
-在设置 -> Tools -> File Watcher 中添加规则
+#### 3.webstorm格式化代码后出现rpx中间存在空格
+在设置 -> Tools -> File Watcher 中添加规则解决
 
 
 ### 已上线案例：
