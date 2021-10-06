@@ -35,5 +35,6 @@
 
 ### 联系方式
 微信二维码
+
 <img src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/hap-wechat.jpg" width="200"/>
 
