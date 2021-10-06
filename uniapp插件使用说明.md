@@ -3,6 +3,10 @@
 ### 介绍
 外卖CPS前端开源项目，兼容淘宝客，无需用户淘宝授权即可跟单实现分销平台，已接入淘宝联盟、美团联盟、美团分销，京东、拼多多已经规划中。
 
+github地址：https://github.com/happiren/dx-coupon-cps
+
+dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
+
 ### 软件架构
 线上正在使用项目，基于uniapp跨端架构，UI框架基于uview开发。
 
