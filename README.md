@@ -31,16 +31,16 @@ dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
 ### 已上线案例：
 爱享外卖优惠券小程序
 
-<img src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/aixiang-wechat.jpg" width="200"/>
+<img src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/aixiang-wechat.jpg" width="200"/>
 
 
 ### 展示效果
 小程序部分页面效果图
 
-<img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/首页.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/饿了么.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/吃喝玩乐.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/美团.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/店铺.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/我的.jpg" width="200"/>
+<img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/首页.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/饿了么.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/吃喝玩乐.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/美团.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/店铺.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/我的.jpg" width="200"/>
 
 ### 联系方式
 微信二维码
 
-<img src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/hap-wechat.jpg" width="200"/>
+<img src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/hap-wechat.jpg" width="200"/>
 
