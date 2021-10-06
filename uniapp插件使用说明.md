@@ -18,7 +18,9 @@ dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
 
 美团联盟：https://union.meituan.com/
 
-饿了么、双十一：https://pub.alimama.com/
+饿了么、淘宝联盟：https://pub.alimama.com/
+
+美团分销平台：https://pub.meituan.com/
 
 #### 2.如何打包成小程序
 

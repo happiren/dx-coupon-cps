@@ -14,11 +14,13 @@ dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
 源码为uniapp项目，需下载hbuilder导入项目打包，可编译成h5或小程序和app
 
 ### 常见问题
-#### 1. 如何获取美团饿了吗的推广链接
+#### 1. 如何获取美团饿了么的推广链接
 
 美团联盟：https://union.meituan.com/
 
-饿了么、双十一：https://pub.alimama.com/
+饿了么、淘宝联盟：https://pub.alimama.com/
+
+美团分销平台：https://pub.meituan.com/
 
 #### 2.如何打包成小程序
 
