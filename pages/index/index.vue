@@ -5,6 +5,17 @@
             <u-loading :show="true" mode="flower" size="50"></u-loading>
         </view>
         <view v-else="loading">
+            <view v-if="showCollectMiniappTips" class="collect-tips" @click="disableShowCollectMiniapp()">
+                <view class="triangle"></view>
+                <view class="wrap">
+                    <view>
+                        <text>添加到我的小程序，每天领红包</text>
+                    </view>
+                    <view style="margin-left: 16rpx;">
+                        <u-icon name="close" size="22"></u-icon>
+                    </view>
+                </view>
+            </view>
             <view class="wrap">
                 <view class="banner">
                     <u-swiper :list="bannerList" @click="onBannerClick"></u-swiper>
@@ -169,6 +180,7 @@
             return {
                 tabBarIndex: 2,
                 loading:true,
+                showCollectMiniappTips: false,
                 timer: null,    //定时器
                 showOfficialAccount:true,
                 bannerList: [],
@@ -195,6 +207,10 @@
         },
         async onLoad() {
             await this.$onLaunched;
+            log.debug("disableShowMiniAppTips",utils.getStorageSync("disableShowMiniAppTips"));
+            if (utils.getStorageSync("disableShowMiniAppTips") != '1'){
+                this.showCollectMiniappTips = true;
+            }
             // uni.hideTabBar();
             let that = this;
             var word = "hello";
@@ -252,6 +268,10 @@
         methods: {
             tabBarChange(e){
                 log.debug("tabBarChange", e)
+            },
+            disableShowCollectMiniapp(){
+                this.showCollectMiniappTips = false;
+                utils.setStorageSync("disableShowMiniAppTips", "1");
             },
             async onShareAppMessage(res) {
                 log.debug("onShareAppMessage")
@@ -375,6 +395,39 @@
 <style lang="scss" >
     page{
         background-color: #F8F8F8;
+    }
+
+    .collect-tips{
+        z-index: 11002;
+        position: absolute;
+        right: 20rpx;
+        top: 0rpx;
+        .triangle{
+            position: relative;
+            z-index: 11002;
+            width: 0;
+            height: 0;
+            right: 100rpx;
+            border-right: 12rpx solid transparent;
+            border-bottom: 20rpx solid #000;
+            border-left: 12rpx solid transparent;
+            margin-left: auto;
+            margin-right: 13rpx;
+        }
+        .wrap{
+            position: relative;
+            right: 20rpx;
+            padding: 10rpx 26rpx;
+            border-radius:26rpx;
+            font-size: 22rpx;
+            background: #000;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: space-between;
+
+        }
     }
 
     .wrap{

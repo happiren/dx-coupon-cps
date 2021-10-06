@@ -541,6 +541,14 @@ function navigateToMiniProgram(appId, path) {
     })
 }
 
+function setStorageSync(key, val){
+    uni.setStorageSync(key, val);
+}
+
+function getStorageSync(key){
+    return uni.getStorageSync(key);
+}
+
 /**
  * 获取授权
  */
@@ -595,6 +603,8 @@ export default {
     setClipboardData: setClipboardData,
     playAudio: playAudio,
     getLocationAuth: getLocationAuth,
+    setStorageSync:setStorageSync,
+    getStorageSync:getStorageSync
 
 }
 

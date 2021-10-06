@@ -4,6 +4,17 @@
 
     </view>
     <view v-else="loading" class="shop">
+      <view v-if="showCollectMiniappTips" class="collect-tips" @click="disableShowCollectMiniapp()">
+        <view class="triangle"></view>
+        <view class="wrap">
+          <view>
+            <text>添加到我的小程序，每天领红包</text>
+          </view>
+          <view style="margin-left: 16rpx;">
+            <u-icon name="close" size="22"></u-icon>
+          </view>
+        </view>
+      </view>
       <view class="info animated fadeIn faster">
         <view class="left">
           <view class="title">{{ shopInfo.shopName }}</view>
@@ -19,7 +30,7 @@
             <!-- <uni-icons type="flag-filled" size="16" color="#e62828"></uni-icons> -->
 			<u-icon v-if="shopInfo.gradeIcon" :name="shopInfo.gradeIcon" style="margin-right: 8rpx;" size=28></u-icon>
 			<u-tag v-if="shopInfo.isMustEat" text="必吃榜" size="mini" mode="light" style="margin-right: 8rpx;" shape="circle" color="#FF536F" bg-color="#F4F4F4" border-color="#F4F4F4"/>
-		
+
             <!-- <text class="icon-font iconfont-fire"></text> -->
   <!--          <view class="info">人均消费 {{  Math.floor(item.shopInfo.pricePerson / 100) }} 元</view>-->
             <text v-if="shopInfo.pricePerson > 0" class="count">人均消费 {{ Math.floor(shopInfo.pricePerson / 100)}}</text>
@@ -103,6 +114,7 @@ export default {
   data() {
     return {
       loading: false,
+      showCollectMiniappTips: false,
       miniAppId: "",
       shopInfo:{},
       dealDetail:{},
@@ -119,9 +131,22 @@ export default {
   onLoad: function (option) {
     const { shopId } = option;
     this.getShopDetail(shopId);
+    this.checkShowCollectMiniapp();
+  },
+  onShow(){
+    this.checkShowCollectMiniapp();
   },
   methods: {
-
+    checkShowCollectMiniapp(){
+      let scene = 0;
+      //#ifdef MP-WEIXIN
+      scene = wx.getLaunchOptionsSync().scene;
+      //#endif
+      log.debug("scene", scene)
+      if ((scene == 1011 || scene == 1048 || scene == 1047) && utils.getStorageSync("disableShowMiniAppTips") != '1') {
+        this.showCollectMiniappTips = true;
+      }
+    },
     async getShopDetail(shopId) {
       this.loading = true;
       utils.showLoading("加载优惠中");
@@ -146,6 +171,10 @@ export default {
 
 
     },
+    disableShowCollectMiniapp(){
+      this.showCollectMiniappTips = false;
+      utils.setStorageSync("disableShowMiniAppTips", "1");
+    },
     onShareAppMessage(res) {
       return {
         title: `大众点评优惠券限时抢！${this.shopInfo.shopName}`,
@@ -165,6 +194,39 @@ export default {
 <style lang="scss">
 page {
   background-color: #f7f7f7;
+}
+
+.collect-tips{
+  z-index: 11002;
+  position: absolute;
+  right: 20rpx;
+  top: 0rpx;
+  .triangle{
+    position: relative;
+    z-index: 11002;
+    width: 0;
+    height: 0;
+    right: 100rpx;
+    border-right: 12rpx solid transparent;
+    border-bottom: 20rpx solid #000;
+    border-left: 12rpx solid transparent;
+    margin-left: auto;
+    margin-right: 13rpx;
+  }
+  .wrap{
+    position: relative;
+    right: 20rpx;
+    padding: 10rpx 26rpx;
+    border-radius:26rpx;
+    font-size: 22rpx;
+    background: #000;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+
+  }
 }
 
 .shop {
