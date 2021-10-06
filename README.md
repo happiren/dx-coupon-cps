@@ -24,7 +24,16 @@ dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
 
 #### 2.如何打包成小程序
 
-直接使用Hbuilder编译成小程序的
+直接使用Hbuilder编译成小程序
+
+2.1、将小程序端代码导入到 HBuilderX
+
+2.2、复制小程序appid配置到manifest.json
+
+2.3、在小程序后台，开发管理中配置服务器request合法域名
+
+2.4、在HBuilderX顶部菜单点击发行 -> 发行到微信小程序，上传版本并提交审核
+注意：manifest.json 中微信小程序权限配置 位置接口 需要勾选上
 
 #### 3.webstorm格式化代码后出现rpx中间存在空格
 在设置 -> Tools -> File Watcher 中添加规则解决
