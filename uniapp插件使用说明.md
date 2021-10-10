@@ -52,6 +52,8 @@ dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
 <img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/首页.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/饿了么.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/吃喝玩乐.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/美团.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/店铺.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/我的.jpg" width="200"/>
 
 ### 联系方式
+微信号：hapi360   (请备注dcloud)
+
 微信二维码
 
 <img src="https://dianxiang.oss-cn-hangzhou.aliyuncs.com/cps/system/miniapp/examples/hap-wechat.jpg" width="200"/>

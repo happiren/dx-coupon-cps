@@ -1,14 +1,15 @@
 <template>
 	<view class="app">
 		<!-- 顶部筛选 分类栏 -->
-		<u-sticky h5-nav-height="0">
-			<view class="nav-bar choose-address">
+<!--		<view :is-back="false" :border-bottom="false" :is-fixed="true" title=" " :background="background" :style="{paddingTop: navbarHeight+ statusBarHeight + 'px'}">-->
+		<u-sticky h5-nav-height="0" >
+			<view class="nav-bar choose-address" :style="{paddingTop: 4 +  statusBarHeight + 'px'}">
 				<view class="city" @click="openPopup">{{ city }}</view><u-icon @click="openPopup" style="margin: 0 16rpx 0 0" name="arrow-down" size="14"></u-icon>
 				<u-search placeholder="搜索门店找优惠" v-model="keywords" :show-action="false" @search="search" @custom="search"></u-search>
 			</view>
 			<view class="sticky-box">
 				<u-tabs :list="tabList" :is-scroll="true" :current="tabCurrent" :bar-style="barStyle"
-					:active-item-style="activeItemStyle" @change="changeTab" ></u-tabs>
+						:active-item-style="activeItemStyle" @change="changeTab" ></u-tabs>
 				<!-- 商品分类 -->
 				<view class="cate-bar">
 					<view class="cate-wrap row b-b">
@@ -17,62 +18,62 @@
 							<text>{{ aroundTitle }}</text>
 							<view class="arrow">
 								<u-icon name="arrow-down" size="12"></u-icon>
-<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
+								<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 						<view class="item" :class="{ active: !!allOpen }" @click="openMenu('allOpen')">
 							<text>{{ allTitle }}</text>
 							<view class="arrow">
 								<u-icon name="arrow-down" size="12"></u-icon>
-<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
+								<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 						<view class="item" :class="{ active: !!sortOpen }" @click="openMenu('sortOpen')">
 							<text>{{ sortTitle }}</text>
 							<view class="arrow">
 								<u-icon name="arrow-down" size="12"></u-icon>
-<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
+								<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 						<view class="item" :class="{ active: !!filterOpen }" @click="openMenu('filterOpen')">
 							<text>筛选</text>
 							<view class="arrow">
 								<u-icon name="arrow-down" size="12"></u-icon>
-<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
+								<!--								<uni-icons type="arrowdown" size="12"></uni-icons>-->
 							</view>
 						</view>
 					</view>
 				</view>
-<!--				<u-mask :show="showMenuMask" @click="showMenuMask = false"></u-mask>-->
+				<!--				<u-mask :show="showMenuMask" @click="showMenuMask = false"></u-mask>-->
 				<view class="dropdown">
 
 					<view class="menu" v-if="aroundOpen">
 						<view class="item b-b" v-for="item in aroundList" @click="handleMenuItem('radii', item)"
-							:key="item.id">{{ item.title }}</view>
+							  :key="item.id">{{ item.title }}</view>
 					</view>
 					<scroll-view style="height: 520rpx" scroll-y="true" v-if="allOpen">
 						<view class="menu menu-cate-list">
 							<view class="item" :class="{ active: item.id === cat1Id }" v-for="item in allCateList"
-								@click="handleMenuItem('cat1Id', item)" :key="item.id">{{ item.name }}</view>
+								  @click="handleMenuItem('cat1Id', item)" :key="item.id">{{ item.name }}</view>
 						</view>
 					</scroll-view>
 					<view class="menu" v-if="sortOpen">
 						<scroll-view style="height: 520rpx" scroll-y="true">
 							<view class="item b-b" v-for="item in sortList" @click="handleMenuItem('sortType', item)"
-								:key="item.id">{{ item.title }}</view>
+								  :key="item.id">{{ item.title }}</view>
 						</scroll-view>
 					</view>
 					<view class="menu menu-filter" v-if="filterOpen">
 						<view class="menu-title">价格</view>
 						<view class="menu-filter-list">
 							<view class="item" :class="{ active: priceRangeIndex === item.id }"
-								v-for="item in priceRange" @click="handlePriceRange(item.id)" :key="item.id">
+								  v-for="item in priceRange" @click="handlePriceRange(item.id)" :key="item.id">
 								{{ item.title }}</view>
 						</view>
 						<view class="menu-title">全部优惠</view>
 						<view class="menu-filter-list">
 							<view class="item" :class="{ active: item.id === filterType }"
-								v-for="item in filterTypeList" @click="handleFilter(item)" :key="item.id">
+								  v-for="item in filterTypeList" @click="handleFilter(item)" :key="item.id">
 								{{ item.title }}</view>
 						</view>
 						<view class="button-list">
@@ -83,6 +84,8 @@
 				</view>
 			</view>
 		</u-sticky>
+
+
 
 		<!--    <view-->
 		<!--      class="mask"-->
@@ -131,10 +134,12 @@
 	import UIcon from "../../../uview-ui/components/u-icon/u-icon";
 	import DxUselect from "../../../components/dx-uselect/dx-uselect";
 	import DxMtAddress from "../../../components/dx-mt-address/dx-mt-address";
-
+	import USticky from "../../../uview-ui/components/u-sticky/u-sticky";
+	let systemInfo = uni.getSystemInfoSync();
 
 	export default {
 		components: {
+			USticky,
 			DxMtAddress,
 			DxUselect,
 			UIcon,
@@ -142,6 +147,7 @@
 		},
 		data() {
 			return {
+				statusBarHeight: systemInfo.statusBarHeight,
 				tabBarIndex: 3,
 				list: [],
 				areaList: [], // 处理后城市列表展示数据
@@ -306,7 +312,19 @@
 		},
 
 		computed: {
+			navbarHeight() {
+				// #ifdef APP-PLUS || H5
+				return this.height ? this.height : 44;
+				// #endif
+				// #ifdef MP
+				// 小程序特别处理，让导航栏高度 = 胶囊高度 + 两倍胶囊顶部与状态栏底部的距离之差(相当于同时获得了导航栏底部与胶囊底部的距离)
+				// 此方法有缺陷，暂不用(会导致少了几个px)，采用直接固定值的方式
+				// return menuButtonInfo.height + (menuButtonInfo.top - this.statusBarHeight) * 2;//导航高度
+				let height = systemInfo.platform == 'ios' ? 44 : 48;
+				return  this.height ? this.height : height;
 
+				// #endif
+			}
 		},
 		onPullDownRefresh() {
 			log.debug("onPullDownRefresh")
@@ -651,7 +669,7 @@
 </script>
 <style lang="scss">
 	.nav-bar {
-		padding-top: 50rpx;
+		/*padding-top: 50rpx;*/
 		background-color: #FFF;
 
 		&.choose-address {

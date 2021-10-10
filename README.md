@@ -51,6 +51,8 @@ dcloud插件地址：https://ext.dcloud.net.cn/plugin?id=6327
 <img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/首页.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/饿了么.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/吃喝玩乐.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/美团.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/店铺.jpg" width="200"/><img style="margin: 16px;box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);border: 1px solid raba(0, 0, 0, 0.2);" src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/我的.jpg" width="200"/>
 
 ### 联系方式
+微信号：hapi360   (请备注dcloud)
+
 微信二维码
 
 <img src="https://raw.githubusercontent.com/happiren/dx-coupon-cps/master/examples/hap-wechat.jpg" width="200"/>

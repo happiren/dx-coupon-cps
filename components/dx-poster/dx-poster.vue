@@ -19,15 +19,17 @@
     <view class="canvas-mask"></view>
     <!-- 海报 -->
     <!-- :width="system.w" :height="system.h" 支付宝必须要这样设置宽高才有效果 -->
+
     <canvas
-      class="canvas"
-      canvas-id="myCanvas"
-      id="myCanvas"
-      :style="'width:' + system.w + 'px; height:' + system.h + 'px;'"
-      :width="system.w"
-      :height="system.h"
+            class="canvas"
+          canvas-id="myCanvas"
+          id="myCanvas"
+          :style="'width:' + system.w + 'px; height:' + system.h + 'px;'"
+          :width="system.w"
+          :height="system.h"
     ></canvas>
-    <view v-if="showBtn" class="button-wrapper" >
+
+    <view v-if="showBtn" class="button-wrapper" :style="{top: poster.h + poster.y+ 30 + 'px'}">
       <!-- 保存海报按钮 -->
       <!-- #ifndef MP-QQ -->
       <!-- cover-view 标签qq小程序有问题 -->
@@ -80,7 +82,7 @@
           w: data.poster.w * system.scale,
           h: data.poster.h * system.scale,
           x: (system.w - data.poster.w * system.scale) / 2,
-          y: (system.h - data.poster.h * system.scale) / 2,
+          y: (system.h - data.poster.h * system.scale) / 8,
           p: data.poster.p * system.scale
         }
         return posterBg
@@ -411,9 +413,9 @@
     }
 
     .button-wrapper {
-      position: fixed;
-      bottom: 120rpx;
-      z-index: 16;
+      position: absolute;
+      /*bottom: 20rpx;*/
+      z-index: 2000;
       display: flex;
       width: 100%;
       height: 72rpx;
